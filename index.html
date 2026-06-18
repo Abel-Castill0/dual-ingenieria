@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dual Ingeniería – Proyectos Eléctricos en Lima</title>
+    <link rel="icon" type="image/webp" href="logod.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>document.documentElement.classList.add('motion-ready');</script>
@@ -115,19 +116,12 @@
             cursor: pointer;
         }
 
-        .nlm {
-            width: 36px;
-            height: 36px;
-            background: var(--blue);
-            border-radius: var(--r8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--fd);
-            font-size: 19px;
-            color: #fff;
-            letter-spacing: 0;
-        }
+        .nav-logo-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    border-radius: var(--r8);
+}
 
         .nlt {
             font-family: var(--fc);
@@ -2514,7 +2508,7 @@
     <!-- NAVBAR (light + hamburger) -->
     <nav>
         <div class="nav-logo" onclick="goPage('home')">
-            <div class="nlm">DI</div>
+            <img src="logod.webp" alt="Dual Ingeniería" class="nav-logo-img" />
             <div class="nlt">Dual Ingeniería<span class="nls">Ingeniería Eléctrica</span></div>
         </div>
         <ul class="nav-links" id="navLinks">
