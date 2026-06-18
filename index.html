@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dual Ingeniería – Proyectos Eléctricos en Lima</title>
-    <link rel="icon" type="image/webp" href="logod.webp" />
+    <link rel="icon" type="image/webp" href="assets/img/logod.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>document.documentElement.classList.add('motion-ready');</script>
@@ -483,13 +483,30 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.12;
+            opacity: 0.18;
+            transform-origin: center;
+            animation: heroBreathe 6s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        @keyframes heroBreathe {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.03);
+            }
         }
 
         .hero-bg-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 100%);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.78) 100%);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
 
         .hero-grid {
@@ -577,13 +594,15 @@
         .hcard {
             --hcard-accent: var(--blue);
             position: relative;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(24px) saturate(140%);
+            -webkit-backdrop-filter: blur(24px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             border-radius: var(--r12);
             padding: 18px 20px;
             animation: fadeUp 0.6s ease both;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
         }
 
         .hcard::before {
@@ -732,6 +751,28 @@
             font-weight: 700;
             color: var(--white);
             line-height: 1.2;
+        }
+
+        .svc-prev-content::after {
+            content: "Ver detalle →";
+            display: block;
+            margin-top: 0;
+            font-family: var(--fb);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--blue);
+            opacity: 0;
+            max-height: 0;
+            transform: translateY(6px);
+            transition: opacity 0.35s ease, max-height 0.35s ease, transform 0.35s ease, margin-top 0.35s ease;
+        }
+
+        .svc-prev-card:hover .svc-prev-content::after {
+            opacity: 1;
+            max-height: 24px;
+            margin-top: 8px;
+            transform: translateY(0);
         }
 
         /* ─── HOME PRODUCTS PREVIEW ─── */
@@ -1245,6 +1286,33 @@
             border-bottom: 1px solid var(--border);
         }
 
+        .cat-toggle {
+            display: none;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--surface2);
+            border: 1px solid var(--border-mid);
+            border-radius: var(--r8);
+            font-family: var(--fc);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--white);
+        }
+
+        .cat-toggle svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s var(--ease-premium);
+        }
+
+        .cat-toggle[aria-expanded="true"] svg {
+            transform: rotate(180deg);
+        }
+
         .cat-list {
             list-style: none;
             display: flex;
@@ -1354,9 +1422,9 @@
         }
 
         .pcard:hover {
-            border-color: var(--border-mid);
+            border-color: var(--border-bright);
             transform: translateY(-6px) rotateX(4deg) rotateY(-2deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(26, 111, 255, 0.12);
+            box-shadow: 0 22px 48px rgba(26, 111, 255, 0.22), 0 0 0 1px rgba(26, 111, 255, 0.25);
         }
 
         .pcard-img {
@@ -1499,6 +1567,25 @@
         .pcard-add.added {
             background: var(--green);
             pointer-events: none;
+            animation: addedPop 0.4s var(--ease-premium);
+        }
+
+        @keyframes addedPop {
+            0% {
+                transform: scale(1);
+            }
+
+            40% {
+                transform: scale(1.12);
+            }
+
+            70% {
+                transform: scale(0.97);
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
         /* Cart drawer */
@@ -2087,6 +2174,19 @@
             width: 26px;
             height: 26px;
             color: #fff;
+            animation: wa-bounce 2.4s var(--ease-premium) infinite;
+        }
+
+        @keyframes wa-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
         }
 
         @keyframes wa-ring {
@@ -2150,6 +2250,29 @@
                 height: auto;
                 border-right: none;
                 border-bottom: 1px solid var(--border);
+                padding: 16px 16px;
+            }
+
+            .cat-toggle {
+                display: flex;
+            }
+
+            .store-sidebar .sidebar-heading {
+                display: none;
+            }
+
+            .cat-list {
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                margin-top: 0;
+                transition: max-height 0.4s var(--ease-premium), opacity 0.3s ease, margin-top 0.3s ease;
+            }
+
+            .cat-list.open {
+                max-height: 620px;
+                opacity: 1;
+                margin-top: 12px;
             }
 
             .nav-links {
@@ -2508,7 +2631,7 @@
     <!-- NAVBAR (light + hamburger) -->
     <nav>
         <div class="nav-logo" onclick="goPage('home')">
-            <img src="logod.webp" alt="Dual Ingeniería" class="nav-logo-img" />
+            <img src="assets/img/logod.webp" alt="Dual Ingeniería" class="nav-logo-img" />
             <div class="nlt">Dual Ingeniería<span class="nls">Ingeniería Eléctrica</span></div>
         </div>
         <ul class="nav-links" id="navLinks">
@@ -2591,7 +2714,7 @@
         <!-- Hero light -->
         <div class="hero">
             <canvas id="three-canvas"></canvas>
-            <div class="hero-bg"><img src="subestacion.jpg" alt="Instalaciones Eléctricas"
+            <div class="hero-bg"><img src="assets/img/subestacion.jpg" alt="Instalaciones Eléctricas"
                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1600'" />
                 <div class="hero-bg-overlay"></div>
             </div>
@@ -2642,7 +2765,7 @@
                 <button class="btn btn-outline" onclick="goPage('servicios')">Ver todos los servicios →</button>
             </div>
             <div class="svc-preview-grid reveal">
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="subestacion.jpg"
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/subestacion.jpg"
                         alt="Subestaciones" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
@@ -2650,28 +2773,28 @@
                         <div class="svc-prev-title">Diseño y Montaje de Subestaciones</div>
                     </div>
                 </div>
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="ingeniero.jpg" alt="Mantenimiento" />
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/ingeniero.jpg" alt="Mantenimiento" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Mantenimiento</div>
                         <div class="svc-prev-title">Mantenimiento Preventivo y Correctivo</div>
                     </div>
                 </div>
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="tendido.jpg" alt="Tendido" />
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/tendido.jpg" alt="Tendido" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Redes</div>
                         <div class="svc-prev-title">Tendido de Red Eléctrica</div>
                     </div>
                 </div>
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="hero.jpg" alt="Estudios" />
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/hero.jpg" alt="Estudios" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Ingeniería</div>
                         <div class="svc-prev-title">Estudios Eléctricos</div>
                     </div>
                 </div>
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="industrial2.jpg"
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/industrial2.jpg"
                         alt="Instalaciones" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
@@ -2679,7 +2802,7 @@
                         <div class="svc-prev-title">Instalaciones Eléctricas Industriales</div>
                     </div>
                 </div>
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="grounding.jpg"
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/grounding.jpg"
                         alt="Puesta a Tierra" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
@@ -2704,35 +2827,35 @@
             </div>
             <div class="prod-preview-row reveal">
                 <div class="ppcard card-3d" onclick="goPage('tienda')">
-                    <div class="ppcard-img"><img src="prod-copper.jpg" alt="Barrillas de Cobre" /></div>
+                    <div class="ppcard-img"><img src="assets/img/prod-copper.jpg" alt="Barrillas de Cobre" loading="lazy" /></div>
                     <div class="ppcard-body">
                         <div class="ppcard-cat">Puesta a Tierra</div>
                         <div class="ppcard-name">Barrillas de Cobre</div>
                     </div>
                 </div>
                 <div class="ppcard card-3d" onclick="goPage('tienda')">
-                    <div class="ppcard-img"><img src="panel.jpg" alt="Interruptores" /></div>
+                    <div class="ppcard-img"><img src="assets/img/prod-breaker.jpg" alt="Interruptores" loading="lazy" /></div>
                     <div class="ppcard-body">
                         <div class="ppcard-cat">Automatización</div>
                         <div class="ppcard-name">Interruptores Diferenciales</div>
                     </div>
                 </div>
                 <div class="ppcard card-3d" onclick="goPage('tienda')">
-                    <div class="ppcard-img"><img src="tendido.jpg" alt="Cable" /></div>
+                    <div class="ppcard-img"><img src="assets/img/prod-cable.jpg" alt="Cable" loading="lazy" /></div>
                     <div class="ppcard-body">
                         <div class="ppcard-cat">Conductores</div>
                         <div class="ppcard-name">Cable Freetox N2XOH</div>
                     </div>
                 </div>
                 <div class="ppcard card-3d" onclick="goPage('tienda')">
-                    <div class="ppcard-img"><img src="tienda-bg2.jpg" alt="Bandeja" /></div>
+                    <div class="ppcard-img"><img src="assets/img/prod-tray.jpg" alt="Bandeja" loading="lazy" /></div>
                     <div class="ppcard-body">
                         <div class="ppcard-cat">Bandeja Portacable</div>
                         <div class="ppcard-name">Bandeja Perforada</div>
                     </div>
                 </div>
                 <div class="ppcard card-3d" onclick="goPage('tienda')">
-                    <div class="ppcard-img"><img src="panel.jpg" alt="Tablero" /></div>
+                    <div class="ppcard-img"><img src="assets/img/prod-panel.jpg" alt="Tablero" loading="lazy" /></div>
                     <div class="ppcard-body">
                         <div class="ppcard-cat">Tableros</div>
                         <div class="ppcard-name">Tablero de Distribución</div>
@@ -2748,7 +2871,7 @@
                 <h2 class="h2">VENTAJAS COMPETITIVAS</h2>
             </div>
             <div class="why-grid">
-                <div class="why-photo reveal"><img src="ingeniero2.jpg" alt="Equipo"
+                <div class="why-photo reveal"><img src="assets/img/ingeniero2.jpg" alt="Equipo"
                         style="width:100%;height:100%;object-fit:cover;border-radius:20px" /></div>
                 <div class="why-list reveal">
                     <div class="why-item">
@@ -2806,7 +2929,7 @@
     <div id="pg-nosotros" class="page">
         <div style="margin-top:70px">
             <div class="about-hero">
-                <img src="ingeniero2.jpg" alt="Equipo" />
+                <img src="assets/img/ingeniero2.jpg" alt="Equipo" />
                 <div class="about-hero-overlay"></div>
                 <div class="about-hero-content">
                     <div class="label">Sobre Nosotros</div>
@@ -2868,37 +2991,37 @@
                     <h2 class="h2">NUESTRO TRABAJO</h2>
                 </div>
                 <div class="grid3 reveal" style="margin-top:40px">
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="subestacion.jpg" alt="Subestaciones" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/subestacion.jpg" alt="Subestaciones" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Subestaciones Eléctricas</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="tendido.jpg" alt="Tendido" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/tendido.jpg" alt="Tendido" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Tendido de Redes</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="grounding.jpg" alt="Puesta a Tierra" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/grounding.jpg" alt="Puesta a Tierra" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Puesta a Tierra</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="hero.jpg" alt="Estudios" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/hero.jpg" alt="Estudios" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Estudios Eléctricos</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="industrial2.jpg" alt="Industrial" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/industrial2.jpg" alt="Industrial" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Instalaciones Industriales</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="panel.jpg" alt="INDECI" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/panel.jpg" alt="INDECI" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
@@ -2941,7 +3064,7 @@
     <div id="pg-servicios" class="page">
         <div style="margin-top:70px">
             <div class="services-hero">
-                <img src="ingeniero.jpg" alt="Servicios" />
+                <img src="assets/img/ingeniero.jpg" alt="Servicios" />
                 <div class="sh-overlay"></div>
                 <div class="sh-content">
                     <div class="label">Especialidades</div>
@@ -2954,7 +3077,7 @@
                 <div class="services-full-grid">
                     <!-- 1 Subestaciones (imagen corregida) -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="subestacion.jpg" alt="Subestaciones" /></div>
+                        <div class="svc-img"><img src="assets/img/subestacion.jpg" alt="Subestaciones" /></div>
                         <div class="svc-text">
                             <div class="svc-num">01</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2974,7 +3097,7 @@
                     </div>
                     <!-- 2 Mantenimiento (imagen corregida) -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="ingeniero.jpg" alt="Mantenimiento" /></div>
+                        <div class="svc-img"><img src="assets/img/ingeniero.jpg" alt="Mantenimiento" /></div>
                         <div class="svc-text">
                             <div class="svc-num">02</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2994,7 +3117,7 @@
                     </div>
                     <!-- 3 Tendido -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="tendido.jpg" alt="Tendido" /></div>
+                        <div class="svc-img"><img src="assets/img/tendido.jpg" alt="Tendido" /></div>
                         <div class="svc-text">
                             <div class="svc-num">03</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3012,7 +3135,7 @@
                     </div>
                     <!-- 4 Estudios -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="hero.jpg" alt="Estudios" /></div>
+                        <div class="svc-img"><img src="assets/img/hero.jpg" alt="Estudios" /></div>
                         <div class="svc-text">
                             <div class="svc-num">04</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3031,7 +3154,7 @@
                     </div>
                     <!-- 5 Instalaciones -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="industrial2.jpg" alt="Instalaciones" /></div>
+                        <div class="svc-img"><img src="assets/img/industrial2.jpg" alt="Instalaciones" /></div>
                         <div class="svc-text">
                             <div class="svc-num">05</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3051,7 +3174,7 @@
                     </div>
                     <!-- 6 Puesta a Tierra -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="grounding.jpg" alt="Puesta a tierra" /></div>
+                        <div class="svc-img"><img src="assets/img/grounding.jpg" alt="Puesta a tierra" /></div>
                         <div class="svc-text">
                             <div class="svc-num">06</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3069,7 +3192,7 @@
                     </div>
                     <!-- 7 INDECI -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="panel.jpg" alt="INDECI" /></div>
+                        <div class="svc-img"><img src="assets/img/panel.jpg" alt="INDECI" /></div>
                         <div class="svc-text">
                             <div class="svc-num">07</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3089,7 +3212,7 @@
                     </div>
                     <!-- 8 Climatización -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="hvac.jpg" alt="Aire Acondicionado" /></div>
+                        <div class="svc-img"><img src="assets/img/hvac.jpg" alt="Aire Acondicionado" /></div>
                         <div class="svc-text">
                             <div class="svc-num">08</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3128,6 +3251,13 @@
         </div>
         <div class="store-layout" style="position:relative;z-index:1;">
             <div class="store-sidebar">
+                <button class="cat-toggle" id="catToggle" aria-expanded="false" aria-controls="catList"
+                    onclick="toggleCatList()">
+                    <span>Filtrar por categoría</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                </button>
                 <div class="sidebar-heading">Categorías</div>
                 <ul class="cat-list" id="catList">
                     <li><a class="active" onclick="filterCat('all', this)">Todos los Productos <span class="cat-count"
@@ -3174,7 +3304,7 @@
     <div id="pg-contacto" class="page">
         <div style="margin-top:70px">
             <div class="contact-hero">
-                <img src="tendido.jpg" alt="Contacto" />
+                <img src="assets/img/tendido.jpg" alt="Contacto" />
                 <div class="ch-overlay"></div>
                 <div class="ch-content">
                     <div class="label">Hablemos</div>
@@ -3323,33 +3453,33 @@
         // ─── Product data ───
         const BASE = "https://dualingenier.com/wp-content/uploads/2022/06/";
         const products = [
-            { id: 1, name: "Interruptores Diferenciales", cat: "automatizacion", catName: "Automatización Industrial", img: "panel.jpg", desc: "Protección diferencial para instalaciones." },
-            { id: 2, name: "Interruptores Termomagneticos Caja Moldeada", cat: "automatizacion", catName: "Automatización Industrial", img: "industrial2.jpg", desc: "Alta capacidad de ruptura." },
-            { id: 3, name: "Interruptores Termomagneticos Riel Din", cat: "automatizacion", catName: "Automatización Industrial", img: "industrial2.jpg", desc: "Para tableros de distribución." },
-            { id: 4, name: "Bandeja Portacable Perforada", cat: "bandeja", catName: "Bandeja Portacable", img: "tienda-bg2.jpg", desc: "Ventilación natural." },
-            { id: 5, name: "Bandeja Portacables Escalera", cat: "bandeja", catName: "Bandeja Portacable", img: "tienda-bg2.jpg", desc: "Soporte de cables gran sección." },
-            { id: 6, name: "Bandeja Portacables Lisa", cat: "bandeja", catName: "Bandeja Portacable", img: "tienda-bg2.jpg", desc: "Protección total de cables." },
-            { id: 7, name: "Bandeja Portacables Malla", cat: "bandeja", catName: "Bandeja Portacable", img: "tienda-bg2.jpg", desc: "Ligera y fácil instalación." },
-            { id: 8, name: "Accesorios para Bandeja Portacable", cat: "bandeja", catName: "Bandeja Portacable", img: "tienda-bg2.jpg", desc: "Uniones, curvas, derivaciones." },
-            { id: 9, name: "Cable Indeco Freetox N2XOH 0.6/1KV", cat: "conductores", catName: "Conductores Eléctricos", img: "tendido.jpg", desc: "Libre de halógenos, 4mm² a 500mm²." },
-            { id: 10, name: "Cable Indeco Freetox NH-80 450/750V", cat: "conductores", catName: "Conductores Eléctricos", img: "tendido.jpg", desc: "2.5mm² a 10mm², interiores." },
-            { id: 11, name: "Cable Indeco N2XSY 18/30 kV", cat: "conductores", catName: "Conductores Eléctricos", img: "tendido.jpg", desc: "Media tensión 50mm² a 630mm²." },
-            { id: 12, name: "Arnés y Línea de Vida", cat: "proteccion", catName: "Equipos de Protección", img: "ingeniero2.jpg", desc: "Trabajos en altura." },
-            { id: 13, name: "Cascos y Lentes de Seguridad", cat: "proteccion", catName: "Equipos de Protección", img: "ingeniero2.jpg", desc: "Dieléctricos, protección visual." },
-            { id: 14, name: "Equipos de Protección Colectiva", cat: "proteccion", catName: "Equipos de Protección", img: "ingeniero2.jpg", desc: "Conos, barreras, señales." },
-            { id: 15, name: "Ropa de Trabajo", cat: "proteccion", catName: "Equipos de Protección", img: "ingeniero2.jpg", desc: "Ignifuga, antiestática." },
-            { id: 16, name: "Equipos y Accesorios de Climatización", cat: "climatizacion", catName: "Climatización", img: "https://images.unsplash.com/photo-1581092921461-39b9d08a9b2e?w=600", fallback: "hvac.jpg", desc: "HVAC proyectos." },
-            { id: 17, name: "Mini Split y Accesorios", cat: "climatizacion", catName: "Climatización", img: "prod-ac.jpg", desc: "Residencial/comercial." },
-            { id: 18, name: "Barrillas de Cobre", cat: "tierra", catName: "Puesta a Tierra", img: "prod-copper.jpg", desc: "Electrodos puesta a tierra." },
-            { id: 19, name: "Bentonita Sódica", cat: "tierra", catName: "Puesta a Tierra", img: "grounding.jpg", desc: "Mejorador resistividad, bolsa 30kg." },
-            { id: 20, name: "Caja de Concreto para PAT", cat: "tierra", catName: "Puesta a Tierra", img: "panel.jpg", desc: "Cajas de registro." },
-            { id: 21, name: "Tor Gel", cat: "tierra", catName: "Puesta a Tierra", img: "grounding.jpg", desc: "Compuesto en gel." },
-            { id: 22, name: "Tablero Auto Soportado", cat: "tableros", catName: "Tableros Eléctricos", img: "panel.jpg", desc: "Distribución industrial." },
-            { id: 23, name: "Tablero de Distribución", cat: "tableros", catName: "Tableros Eléctricos", img: "panel.jpg", desc: "Empotrados y adosados." },
-            { id: 24, name: "Tuberia Conduit EMT", cat: "tuberias", catName: "Tuberías Eléctricas", img: "tienda-bg2.jpg", desc: "Metálica pared delgada." },
-            { id: 25, name: "Tuberia Conduit Flexible", cat: "tuberias", catName: "Tuberías Eléctricas", img: "tienda-bg2.jpg", desc: "Conexiones con vibración." },
-            { id: 26, name: "Tuberia Conduit PVC", cat: "tuberias", catName: "Tuberías Eléctricas", img: "tienda-bg2.jpg", desc: "PVC corrugada y lisa." },
-            { id: 27, name: "Accesorios para Tuberías", cat: "tuberias", catName: "Tuberías Eléctricas", img: "tienda-bg2.jpg", desc: "Conectores, curvas, uniones." }
+            { id: 1, name: "Interruptores Diferenciales", cat: "automatizacion", catName: "Automatización Industrial", img: "assets/img/prod-breaker.jpg", desc: "Protección diferencial para instalaciones." },
+            { id: 2, name: "Interruptores Termomagneticos Caja Moldeada", cat: "automatizacion", catName: "Automatización Industrial", img: "assets/img/prod-breaker.jpg", desc: "Alta capacidad de ruptura." },
+            { id: 3, name: "Interruptores Termomagneticos Riel Din", cat: "automatizacion", catName: "Automatización Industrial", img: "assets/img/prod-breaker.jpg", desc: "Para tableros de distribución." },
+            { id: 4, name: "Bandeja Portacable Perforada", cat: "bandeja", catName: "Bandeja Portacable", img: "assets/img/prod-tray.jpg", desc: "Ventilación natural." },
+            { id: 5, name: "Bandeja Portacables Escalera", cat: "bandeja", catName: "Bandeja Portacable", img: "assets/img/prod-tray.jpg", desc: "Soporte de cables gran sección." },
+            { id: 6, name: "Bandeja Portacables Lisa", cat: "bandeja", catName: "Bandeja Portacable", img: "assets/img/prod-tray.jpg", desc: "Protección total de cables." },
+            { id: 7, name: "Bandeja Portacables Malla", cat: "bandeja", catName: "Bandeja Portacable", img: "assets/img/prod-tray.jpg", desc: "Ligera y fácil instalación." },
+            { id: 8, name: "Accesorios para Bandeja Portacable", cat: "bandeja", catName: "Bandeja Portacable", img: "assets/img/prod-tray.jpg", desc: "Uniones, curvas, derivaciones." },
+            { id: 9, name: "Cable Indeco Freetox N2XOH 0.6/1KV", cat: "conductores", catName: "Conductores Eléctricos", img: "assets/img/prod-cable.jpg", desc: "Libre de halógenos, 4mm² a 500mm²." },
+            { id: 10, name: "Cable Indeco Freetox NH-80 450/750V", cat: "conductores", catName: "Conductores Eléctricos", img: "assets/img/prod-cable.jpg", desc: "2.5mm² a 10mm², interiores." },
+            { id: 11, name: "Cable Indeco N2XSY 18/30 kV", cat: "conductores", catName: "Conductores Eléctricos", img: "assets/img/prod-cable.jpg", desc: "Media tensión 50mm² a 630mm²." },
+            { id: 12, name: "Arnés y Línea de Vida", cat: "proteccion", catName: "Equipos de Protección", img: "assets/img/prod-harness.jpg", desc: "Trabajos en altura." },
+            { id: 13, name: "Cascos y Lentes de Seguridad", cat: "proteccion", catName: "Equipos de Protección", img: "assets/img/prod-helmet.jpg", desc: "Dieléctricos, protección visual." },
+            { id: 14, name: "Equipos de Protección Colectiva", cat: "proteccion", catName: "Equipos de Protección", img: "assets/img/prod-safety.jpg", desc: "Conos, barreras, señales." },
+            { id: 15, name: "Ropa de Trabajo", cat: "proteccion", catName: "Equipos de Protección", img: "assets/img/prod-workwear.jpg", desc: "Ignifuga, antiestática." },
+            { id: 16, name: "Equipos y Accesorios de Climatización", cat: "climatizacion", catName: "Climatización", img: "assets/img/hvac.jpg", desc: "HVAC proyectos." },
+            { id: 17, name: "Mini Split y Accesorios", cat: "climatizacion", catName: "Climatización", img: "assets/img/prod-ac.jpg", desc: "Residencial/comercial." },
+            { id: 18, name: "Barrillas de Cobre", cat: "tierra", catName: "Puesta a Tierra", img: "assets/img/prod-copper.jpg", desc: "Electrodos puesta a tierra." },
+            { id: 19, name: "Bentonita Sódica", cat: "tierra", catName: "Puesta a Tierra", img: "assets/img/prod-ground.jpg", desc: "Mejorador resistividad, bolsa 30kg." },
+            { id: 20, name: "Caja de Concreto para PAT", cat: "tierra", catName: "Puesta a Tierra", img: "assets/img/prod-junction.jpg", desc: "Cajas de registro." },
+            { id: 21, name: "Tor Gel", cat: "tierra", catName: "Puesta a Tierra", img: "assets/img/prod-ground.jpg", desc: "Compuesto en gel." },
+            { id: 22, name: "Tablero Auto Soportado", cat: "tableros", catName: "Tableros Eléctricos", img: "assets/img/prod-panel.jpg", desc: "Distribución industrial." },
+            { id: 23, name: "Tablero de Distribución", cat: "tableros", catName: "Tableros Eléctricos", img: "assets/img/prod-panel.jpg", desc: "Empotrados y adosados." },
+            { id: 24, name: "Tuberia Conduit EMT", cat: "tuberias", catName: "Tuberías Eléctricas", img: "assets/img/prod-conduit.jpg", desc: "Metálica pared delgada." },
+            { id: 25, name: "Tuberia Conduit Flexible", cat: "tuberias", catName: "Tuberías Eléctricas", img: "assets/img/prod-conduit.jpg", desc: "Conexiones con vibración." },
+            { id: 26, name: "Tuberia Conduit PVC", cat: "tuberias", catName: "Tuberías Eléctricas", img: "assets/img/prod-conduit.jpg", desc: "PVC corrugada y lisa." },
+            { id: 27, name: "Accesorios para Tuberías", cat: "tuberias", catName: "Tuberías Eléctricas", img: "assets/img/prod-conduit.jpg", desc: "Conectores, curvas, uniones." }
         ];
 
         // Cart state
@@ -3464,11 +3594,26 @@
             requestAnimationFrame(() => { observeReveals(grid); bindTiltCards(grid); });
         }
 
+        function toggleCatList() {
+            const list = document.getElementById('catList');
+            const btn = document.getElementById('catToggle');
+            if (!list || !btn) return;
+            const open = list.classList.toggle('open');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+
         function filterCat(cat, el) {
             currentCat = cat;
             document.querySelectorAll('.cat-list li a').forEach(a => a.classList.remove('active'));
             if (el) el.classList.add('active');
             renderProducts();
+            // En móvil, colapsa el acordeón tras elegir
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                const list = document.getElementById('catList');
+                const btn = document.getElementById('catToggle');
+                if (list) list.classList.remove('open');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            }
         }
         function filterProducts() {
             currentSearch = document.getElementById('searchInput')?.value || '';
@@ -3582,7 +3727,7 @@
             const camera = new THREE.PerspectiveCamera(60, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
             camera.position.z = 30;
             const particles = new THREE.BufferGeometry();
-            const count = 120;
+            const count = 150;
             const pos = new Float32Array(count * 3);
             for (let i = 0; i < count; i++) {
                 pos[i * 3] = (Math.random() - 0.5) * 60;
@@ -3590,11 +3735,11 @@
                 pos[i * 3 + 2] = (Math.random() - 0.5) * 20;
             }
             particles.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-            const mat = new THREE.PointsMaterial({ color: 0x1a6fff, size: 0.15, transparent: true, opacity: 0.6 });
+            const mat = new THREE.PointsMaterial({ color: 0x1a6fff, size: 0.18, transparent: true, opacity: 0.7 });
             const pts = new THREE.Points(particles, mat);
             scene.add(pts);
             const lineGeo = new THREE.BufferGeometry();
-            const lineMat = new THREE.LineBasicMaterial({ color: 0x1a6fff, transparent: true, opacity: 0.15 });
+            const lineMat = new THREE.LineBasicMaterial({ color: 0x1a6fff, transparent: true, opacity: 0.28, linewidth: 2 });
             const lines = new THREE.LineSegments(lineGeo, lineMat);
             scene.add(lines);
             let time = 0;
@@ -3637,14 +3782,40 @@
         // ═══ PARALLAX HERO ═══
         (function () {
             const hero = document.querySelector('.hero');
-            const bg = hero?.querySelector('.hero-bg img');
+            const bg = hero?.querySelector('.hero-bg');
             if (!hero || !bg || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
             let ticking = false;
             window.addEventListener('scroll', () => {
                 if (ticking) return;
                 requestAnimationFrame(() => {
                     const y = window.scrollY;
-                    bg.style.transform = y < hero.offsetHeight ? `translate3d(0, ${y * 0.22}px, 0) scale(1.045)` : '';
+                    bg.style.transform = y < hero.offsetHeight ? `translate3d(0, ${y * 0.22}px, 0)` : '';
+                    ticking = false;
+                });
+                ticking = true;
+            }, { passive: true });
+        })();
+
+        // ═══ PARALLAX SUTIL — NOSOTROS / CONTACTO ═══
+        (function () {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const targets = [
+                { sel: '#pg-nosotros .about-hero img' },
+                { sel: '#pg-contacto .contact-hero img' }
+            ].map(t => ({ el: document.querySelector(t.sel) })).filter(t => t.el);
+            if (!targets.length) return;
+            targets.forEach(t => { t.el.style.willChange = 'transform'; });
+            let ticking = false;
+            window.addEventListener('scroll', () => {
+                if (ticking) return;
+                requestAnimationFrame(() => {
+                    const y = window.scrollY;
+                    targets.forEach(t => {
+                        const host = t.el.closest('.page');
+                        if (host && host.classList.contains('active')) {
+                            t.el.style.transform = `translate3d(0, ${y * 0.15}px, 0) scale(1.06)`;
+                        }
+                    });
                     ticking = false;
                 });
                 ticking = true;
