@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://abel-castill0.github.io/dual-ingenieria/sitemap.xml

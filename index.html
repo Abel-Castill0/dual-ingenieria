@@ -12,6 +12,22 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Barlow+Condensed:wght@400;600;700&display=swap"
         rel="stylesheet" />
+    <!-- SEO -->
+    <meta name="description" content="Dual Ingeniería: empresa peruana de ingeniería eléctrica. Estudios eléctricos especializados, diseño de subestaciones, mantenimiento, instalaciones y venta de materiales eléctricos en Lima y provincias." />
+    <meta name="keywords" content="ingeniería eléctrica Lima, estudios eléctricos, subestaciones eléctricas, mantenimiento eléctrico, instalaciones industriales, puesta a tierra, tableros eléctricos, Peru" />
+    <link rel="canonical" href="https://abel-castill0.github.io/dual-ingenieria/" />
+    <meta name="theme-color" content="#1a6fff" />
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://abel-castill0.github.io/dual-ingenieria/" />
+    <meta property="og:title" content="Dual Ingeniería – Proyectos Eléctricos en Lima" />
+    <meta property="og:description" content="Soluciones de ingeniería eléctrica: estudios especializados, subestaciones, mantenimiento, instalaciones y productos eléctricos. Lima, Perú." />
+    <meta property="og:image" content="https://abel-castill0.github.io/dual-ingenieria/assets/img/subestacion.jpg" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dual Ingeniería – Proyectos Eléctricos en Lima" />
+    <meta name="twitter:description" content="Soluciones de ingeniería eléctrica: estudios especializados, subestaciones, mantenimiento, instalaciones y productos eléctricos. Lima, Perú." />
+    <meta name="twitter:image" content="https://abel-castill0.github.io/dual-ingenieria/assets/img/subestacion.jpg" />
     <style>
         /* ─── RESET & VARIABLES (LIGHT THEME) ─── */
         *,
@@ -1188,7 +1204,7 @@
         .store-header {
             position: relative;
             background: linear-gradient(rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.92)),
-                url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=1200') center/cover no-repeat;
+                url('assets/img/tienda-bg.jpg') center/cover no-repeat;
             border-bottom: 1px solid var(--border);
             padding: 40px 5%;
             margin-top: 70px;
@@ -2621,7 +2637,7 @@
 
 <body>
     <!-- FLOATING WHATSAPP -->
-    <a class="float-wa" href="https://api.whatsapp.com/send/?phone=51973042657" target="_blank" rel="noopener">
+    <a class="float-wa" href="https://api.whatsapp.com/send/?phone=51973042657&text=Hola%2C%20me%20interesa%20obtener%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20ingenier%C3%ADa%20el%C3%A9ctrica." target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
         <svg viewBox="0 0 24 24" fill="currentColor">
             <path
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -2635,11 +2651,11 @@
             <div class="nlt">Dual Ingeniería<span class="nls">Ingeniería Eléctrica</span></div>
         </div>
         <ul class="nav-links" id="navLinks">
-            <li><a onclick="goPage('home')" data-page="home">Inicio</a></li>
-            <li><a onclick="goPage('nosotros')" data-page="nosotros">Nosotros</a></li>
-            <li><a onclick="goPage('servicios')" data-page="servicios">Servicios</a></li>
-            <li><a onclick="goPage('tienda')" data-page="tienda">Tienda</a></li>
-            <li><a onclick="goPage('contacto')" data-page="contacto">Contacto</a></li>
+            <li><a href="#home" onclick="goPage('home');return false" data-page="home">Inicio</a></li>
+            <li><a href="#nosotros" onclick="goPage('nosotros');return false" data-page="nosotros">Nosotros</a></li>
+            <li><a href="#servicios" onclick="goPage('servicios');return false" data-page="servicios">Servicios</a></li>
+            <li><a href="#tienda" onclick="goPage('tienda');return false" data-page="tienda">Tienda</a></li>
+            <li><a href="#contacto" onclick="goPage('contacto');return false" data-page="contacto">Contacto</a></li>
         </ul>
         <div style="display: flex; align-items: center; gap: 8px;">
             <button class="nav-cart-btn" onclick="toggleCart()">
@@ -2662,12 +2678,12 @@
     <!-- Mobile menu -->
     <div class="mobile-backdrop" id="mobileBackdrop"></div>
     <div class="mobile-menu" id="mobileMenu">
-        <a onclick="goPage('home');closeMobileMenu()">Inicio</a>
-        <a onclick="goPage('nosotros');closeMobileMenu()">Nosotros</a>
-        <a onclick="goPage('servicios');closeMobileMenu()">Servicios</a>
-        <a onclick="goPage('tienda');closeMobileMenu()">Tienda</a>
-        <a onclick="goPage('contacto');closeMobileMenu()">Contacto</a>
-        <a class="nav-cta-mobile" onclick="goPage('contacto');closeMobileMenu()">Cotizar Proyecto</a>
+        <a href="#home" onclick="goPage('home');closeMobileMenu();return false">Inicio</a>
+        <a href="#nosotros" onclick="goPage('nosotros');closeMobileMenu();return false">Nosotros</a>
+        <a href="#servicios" onclick="goPage('servicios');closeMobileMenu();return false">Servicios</a>
+        <a href="#tienda" onclick="goPage('tienda');closeMobileMenu();return false">Tienda</a>
+        <a href="#contacto" onclick="goPage('contacto');closeMobileMenu();return false">Contacto</a>
+        <a class="nav-cta-mobile" href="#contacto" onclick="goPage('contacto');closeMobileMenu();return false">Cotizar Proyecto</a>
     </div>
 
     <!-- Cart Drawer (light) -->
@@ -2715,7 +2731,7 @@
         <div class="hero">
             <canvas id="three-canvas"></canvas>
             <div class="hero-bg"><img src="assets/img/subestacion.jpg" alt="Instalaciones Eléctricas"
-                    onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1600'" />
+                    onerror="this.onerror=null;this.src='assets/img/industrial.jpg'" />
                 <div class="hero-bg-overlay"></div>
             </div>
             <div class="hero-grid"></div>
@@ -2765,7 +2781,7 @@
                 <button class="btn btn-outline" onclick="goPage('servicios')">Ver todos los servicios →</button>
             </div>
             <div class="svc-preview-grid reveal">
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/hero.jpg" alt="Estudios Eléctricos" />
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/hero.jpg" alt="Estudios Eléctricos" loading="lazy" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Ingeniería</div>
@@ -2773,21 +2789,21 @@
                     </div>
                 </div>
                 <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/subestacion.jpg"
-                        alt="Subestaciones" />
+                        alt="Subestaciones" loading="lazy" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Electricidad</div>
                         <div class="svc-prev-title">Diseño y Montaje de Subestaciones Eléctricas</div>
                     </div>
                 </div>
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/ingeniero.jpg" alt="Mantenimiento" />
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/ingeniero.jpg" alt="Mantenimiento" loading="lazy" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Mantenimiento</div>
                         <div class="svc-prev-title">Mantenimiento Preventivo, Predictivo y Correctivo</div>
                     </div>
                 </div>
-                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/tendido.jpg" alt="Tendido" />
+                <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/tendido.jpg" alt="Tendido" loading="lazy" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Redes</div>
@@ -2795,7 +2811,7 @@
                     </div>
                 </div>
                 <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/industrial2.jpg"
-                        alt="Instalaciones" />
+                        alt="Instalaciones" loading="lazy" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Instalaciones</div>
@@ -2803,7 +2819,7 @@
                     </div>
                 </div>
                 <div class="svc-prev-card" onclick="goPage('servicios')"><img src="assets/img/grounding.jpg"
-                        alt="Puesta a Tierra" />
+                        alt="Puesta a Tierra" loading="lazy" />
                     <div class="svc-prev-overlay"></div>
                     <div class="svc-prev-content">
                         <div class="svc-prev-cat">Seguridad</div>
@@ -2872,7 +2888,7 @@
             </div>
             <div class="why-grid">
                 <div class="why-photo reveal"><img src="assets/img/ingeniero2.jpg" alt="Equipo"
-                        style="width:100%;height:100%;object-fit:cover;border-radius:20px" /></div>
+                        style="width:100%;height:100%;object-fit:cover;border-radius:20px" loading="lazy" /></div>
                 <div class="why-list reveal">
                     <div class="why-item">
                         <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -2929,7 +2945,7 @@
     <div id="pg-nosotros" class="page">
         <div style="margin-top:70px">
             <div class="about-hero">
-                <img src="assets/img/ingeniero2.jpg" alt="Equipo" />
+                <img src="assets/img/ingeniero2.jpg" alt="Equipo" loading="lazy" />
                 <div class="about-hero-overlay"></div>
                 <div class="about-hero-content">
                     <div class="label">Sobre Nosotros</div>
@@ -2991,37 +3007,37 @@
                     <h2 class="h2">NUESTRO TRABAJO</h2>
                 </div>
                 <div class="grid3 reveal" style="margin-top:40px">
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/subestacion.jpg" alt="Subestaciones" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/subestacion.jpg" alt="Subestaciones" loading="lazy" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Subestaciones Eléctricas</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/tendido.jpg" alt="Tendido" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/tendido.jpg" alt="Tendido" loading="lazy" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Tendido de Redes</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/grounding.jpg" alt="Puesta a Tierra" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/grounding.jpg" alt="Puesta a Tierra" loading="lazy" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Puesta a Tierra</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/hero.jpg" alt="Estudios Eléctricos Especializados" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/hero.jpg" alt="Estudios Eléctricos Especializados" loading="lazy" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Estudios Eléctricos Especializados</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/industrial2.jpg" alt="Industrial" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/industrial2.jpg" alt="Industrial" loading="lazy" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
                             Instalaciones Industriales</div>
                     </div>
-                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/panel.jpg" alt="INDECI" />
+                    <div class="photo-frame" style="aspect-ratio:3/2"><img src="assets/img/panel.jpg" alt="INDECI" loading="lazy" />
                         <div class="photo-overlay"></div>
                         <div
                             style="position:absolute;bottom:16px;left:16px;font-family:var(--fc);font-size:16px;font-weight:700;color:var(--white)">
@@ -3064,7 +3080,7 @@
     <div id="pg-servicios" class="page">
         <div style="margin-top:70px">
             <div class="services-hero">
-                <img src="assets/img/ingeniero.jpg" alt="Servicios" />
+                <img src="assets/img/ingeniero.jpg" alt="Servicios" loading="lazy" />
                 <div class="sh-overlay"></div>
                 <div class="sh-content">
                     <div class="label">Especialidades</div>
@@ -3077,7 +3093,7 @@
                 <div class="services-full-grid">
                     <!-- 1 Estudios Eléctricos Especializados -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="assets/img/hero.jpg" alt="Estudios Eléctricos Especializados" /></div>
+                        <div class="svc-img"><img src="assets/img/hero.jpg" alt="Estudios Eléctricos Especializados" loading="lazy" /></div>
                         <div class="svc-text">
                             <div class="svc-num">01</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3099,7 +3115,7 @@
                     </div>
                     <!-- 2 Subestaciones -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="assets/img/subestacion.jpg" alt="Subestaciones" /></div>
+                        <div class="svc-img"><img src="assets/img/subestacion.jpg" alt="Subestaciones" loading="lazy" /></div>
                         <div class="svc-text">
                             <div class="svc-num">02</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3119,7 +3135,7 @@
                     </div>
                     <!-- 3 Mantenimiento -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="assets/img/ingeniero.jpg" alt="Mantenimiento" /></div>
+                        <div class="svc-img"><img src="assets/img/ingeniero.jpg" alt="Mantenimiento" loading="lazy" /></div>
                         <div class="svc-text">
                             <div class="svc-num">03</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3139,7 +3155,7 @@
                     </div>
                     <!-- 4 Tendido -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="assets/img/tendido.jpg" alt="Tendido" /></div>
+                        <div class="svc-img"><img src="assets/img/tendido.jpg" alt="Tendido" loading="lazy" /></div>
                         <div class="svc-text">
                             <div class="svc-num">04</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3157,7 +3173,7 @@
                     </div>
                     <!-- 5 Instalaciones -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="assets/img/industrial2.jpg" alt="Instalaciones" /></div>
+                        <div class="svc-img"><img src="assets/img/industrial2.jpg" alt="Instalaciones" loading="lazy" /></div>
                         <div class="svc-text">
                             <div class="svc-num">05</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3177,7 +3193,7 @@
                     </div>
                     <!-- 6 Puesta a Tierra -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="assets/img/grounding.jpg" alt="Puesta a tierra" /></div>
+                        <div class="svc-img"><img src="assets/img/grounding.jpg" alt="Puesta a tierra" loading="lazy" /></div>
                         <div class="svc-text">
                             <div class="svc-num">06</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3195,7 +3211,7 @@
                     </div>
                     <!-- 7 INDECI -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="assets/img/panel.jpg" alt="INDECI" /></div>
+                        <div class="svc-img"><img src="assets/img/panel.jpg" alt="INDECI" loading="lazy" /></div>
                         <div class="svc-text">
                             <div class="svc-num">07</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3215,7 +3231,7 @@
                     </div>
                     <!-- 8 Climatización -->
                     <div class="svc-card-full reveal card-3d">
-                        <div class="svc-img"><img src="assets/img/hvac.jpg" alt="Aire Acondicionado" /></div>
+                        <div class="svc-img"><img src="assets/img/hvac.jpg" alt="Aire Acondicionado" loading="lazy" /></div>
                         <div class="svc-text">
                             <div class="svc-num">08</div>
                             <div class="svc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -3247,7 +3263,7 @@
                     <circle cx="11" cy="11" r="8" />
                     <path d="M21 21l-4.35-4.35" />
                 </svg>
-                <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="filterProducts()" />
+                <input type="text" id="searchInput" placeholder="Buscar producto..." oninput="filterProducts()" aria-label="Buscar producto en el catálogo" />
             </div>
             <div style="font-size:13px;color:var(--muted)">🛒 Agrega productos y envía tu cotización por <strong
                     style="color:#25d366">WhatsApp</strong></div>
@@ -3307,7 +3323,7 @@
     <div id="pg-contacto" class="page">
         <div style="margin-top:70px">
             <div class="contact-hero">
-                <img src="assets/img/tendido.jpg" alt="Contacto" />
+                <img src="assets/img/tendido.jpg" alt="Contacto" loading="lazy" />
                 <div class="ch-overlay"></div>
                 <div class="ch-content">
                     <div class="label">Hablemos</div>
@@ -3346,7 +3362,7 @@
                                 <div class="cinfo-sub">Atendemos proyectos en todo Lima y provincias</div>
                             </div>
                         </div>
-                        <a class="wa-block" href="https://api.whatsapp.com/send/?phone=51973042657" target="_blank">
+                        <a class="wa-block" href="https://api.whatsapp.com/send/?phone=51973042657&text=Hola%2C%20me%20interesa%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20ingenier%C3%ADa%20el%C3%A9ctrica." target="_blank" rel="noopener noreferrer">
                             <svg viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -3360,18 +3376,18 @@
                     <div class="cf">
                         <div class="cf-title">Envíanos tu consulta</div>
                         <div class="fg2">
-                            <div class="fg"><label>Nombre Completo</label><input type="text" id="cNombre"
+                            <div class="fg"><label for="cNombre">Nombre Completo</label><input type="text" id="cNombre"
                                     placeholder="Juan Pérez"></div>
-                            <div class="fg"><label>Empresa</label><input type="text" id="cEmpresa"
+                            <div class="fg"><label for="cEmpresa">Empresa</label><input type="text" id="cEmpresa"
                                     placeholder="Mi Empresa SAC"></div>
                         </div>
                         <div class="fg2">
-                            <div class="fg"><label>Email</label><input type="email" id="cEmail"
+                            <div class="fg"><label for="cEmail">Email</label><input type="email" id="cEmail"
                                     placeholder="correo@empresa.com"></div>
-                            <div class="fg"><label>Teléfono</label><input type="tel" id="cTelefono"
+                            <div class="fg"><label for="cTelefono">Teléfono</label><input type="tel" id="cTelefono"
                                     placeholder="+51 999 999 999"></div>
                         </div>
-                        <div class="fg"><label>Tipo de Consulta</label><select id="cTipo">
+                        <div class="fg"><label for="cTipo">Tipo de Consulta</label><select id="cTipo">
                                 <option value="">Selecciona una opción...</option>
                                 <option>Cotización de Proyecto Eléctrico</option>
                                 <option>Mantenimiento de Subestación</option>
@@ -3384,7 +3400,7 @@
                                 <option>Cotización de Productos</option>
                                 <option>Otro</option>
                             </select></div>
-                        <div class="fg"><label>Descripción del Proyecto</label><textarea id="cMensaje"
+                        <div class="fg"><label for="cMensaje">Descripción del Proyecto</label><textarea id="cMensaje"
                                 placeholder="Cuéntanos sobre tu proyecto..."></textarea></div>
                         <button class="submit-btn" onclick="submitContactForm()">Enviar por WhatsApp <svg width="18"
                                 height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -3442,7 +3458,7 @@
                     <li><a href="tel:+51973042657">+51 973 042 657</a></li>
                     <li><a href="mailto:proyectos@dualingenier.com">proyectos@dualingenier.com</a></li>
                     <li><a href="mailto:ventas@dualingenier.com">ventas@dualingenier.com</a></li>
-                    <li><a href="https://dualingenier.com" target="_blank">dualingenier.com</a></li>
+                    <li><a href="https://dualingenier.com" target="_blank" rel="noopener noreferrer">dualingenier.com</a></li>
                 </ul>
             </div>
         </div>
@@ -3578,7 +3594,7 @@
             grid.innerHTML = filtered.map(p => `
                 <div class="pcard reveal">
                     <div class="pcard-img">
-                        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='${p.fallback || 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600'}'">
+                        <img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22 viewBox=%220 0 400 300%22%3E%3Crect width=%22400%22 height=%22300%22 fill=%22%23f1f5f9%22/%3E%3Ctext x=%22200%22 y=%22155%22 font-family=%22sans-serif%22 font-size=%2214%22 fill=%22%2394a3b8%22 text-anchor=%22middle%22%3EImagen no disponible%3C/text%3E%3C/svg%3E'">
                         <div class="pcard-cat-badge">${p.catName}</div>
                     </div>
                     <div class="pcard-body">
@@ -3655,7 +3671,9 @@
 
         // Page routing
         const PAGES_WITH_FOOTER = ['home', 'nosotros', 'servicios', 'contacto'];
-        function goPage(name) {
+        const VALID_PAGES = ['home', 'nosotros', 'servicios', 'tienda', 'contacto'];
+        function goPage(name, pushHash = true) {
+            if (!VALID_PAGES.includes(name)) name = 'home';
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             const pg = document.getElementById('pg-' + name);
             if (pg) { pg.classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -3663,7 +3681,14 @@
             document.getElementById('siteFooter').style.display = PAGES_WITH_FOOTER.includes(name) ? 'block' : 'none';
             if (name === 'tienda') setTimeout(() => { renderProducts(); initStoreThree(); }, 50);
             setTimeout(() => { observeReveals(pg); bindTiltCards(pg); }, 100);
+            if (pushHash && location.hash !== '#' + name) {
+                history.pushState({ page: name }, '', '#' + name);
+            }
         }
+        window.addEventListener('popstate', (e) => {
+            const page = (e.state && e.state.page) || location.hash.replace('#', '') || 'home';
+            goPage(page, false);
+        });
 
         function submitContactForm() {
             const n = document.getElementById('cNombre')?.value.trim();
@@ -3701,21 +3726,40 @@
         function openMobileMenu() {
             mobileMenu.classList.add('open');
             mobileBackdrop.classList.add('open');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            menuToggle.setAttribute('aria-label', 'Cerrar menú');
         }
         function closeMobileMenu() {
             mobileMenu.classList.remove('open');
             mobileBackdrop.classList.remove('open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Abrir menú');
         }
         menuToggle.addEventListener('click', openMobileMenu);
         mobileBackdrop.addEventListener('click', closeMobileMenu);
         mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
 
+        // Category counters — derived from products array
+        function initCategoryCounters() {
+            const counts = {};
+            products.forEach(p => { counts[p.cat] = (counts[p.cat] || 0) + 1; });
+            const allEl = document.getElementById('cnt-all');
+            if (allEl) allEl.textContent = products.length;
+            Object.entries(counts).forEach(([cat, n]) => {
+                const el = document.getElementById('cnt-' + cat);
+                if (el) el.textContent = n;
+            });
+        }
+
         // Init
         window.addEventListener('DOMContentLoaded', () => {
-            goPage('home');
+            const hashPage = location.hash.replace('#', '');
+            const startPage = VALID_PAGES.includes(hashPage) ? hashPage : 'home';
+            goPage(startPage, !location.hash);
+            initCategoryCounters();
             setTimeout(animateCounters, 500);
-            setTimeout(() => { observeReveals(document.getElementById('pg-home')); bindTiltCards(document.getElementById('pg-home')); }, 200);
-            document.getElementById('siteFooter').style.display = 'block';
+            setTimeout(() => { observeReveals(document.getElementById('pg-' + startPage)); bindTiltCards(document.getElementById('pg-' + startPage)); }, 200);
+            document.getElementById('siteFooter').style.display = PAGES_WITH_FOOTER.includes(startPage) ? 'block' : 'none';
         });
 
 
