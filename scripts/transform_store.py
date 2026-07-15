@@ -43,10 +43,6 @@ for old, new in product_img_map.items():
     html = html.replace('BASE+"' + old + '"', '"' + new + '"')
     html = html.replace('BASE+"' + old, '"' + new)  # without closing quote just in case
 
-# Manual fix for product 16 and 17 (climatization) which already have hvac.jpg and prod-ac.jpg
-# Product 16: img:"hvac.jpg" (already correct)
-# Product 17: needs to change from Mini-BOTON-300x300.jpg to prod-ac.jpg
-html = html.replace('"https://dualingenier.com/wp-content/uploads/2025/04/Mini-BOTON-300x300.jpg"', '"prod-ac.jpg"')
 
 # ─── 2. Add store-header background image and overlay ───
 store_header_css = '''

@@ -23,8 +23,6 @@ replacements = [
     # Servicios page full cards (mismas URLs)
     # INDECI
     ('https://dualingenier.com/wp-content/uploads/2022/06/IMG-SERVICO-ING.jpg', 'panel.jpg'),
-    # Climatización
-    ('https://dualingenier.com/wp-content/uploads/2025/04/para-pagina.png', 'hvac.jpg'),
     # Contacto hero
     # (ya cubierto arriba por img-servico-005.jpg -> subestacion.jpg, pero para contacto usaremos tendido)
 ]

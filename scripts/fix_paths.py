@@ -10,7 +10,7 @@ html = re.sub(r'BASE\+"([a-zA-Z0-9_-]+\.jpg)"', r'"\1"', html)
 # Corrección 2: en el HTML, las URLs completas de dualingenier.com para imágenes locales
 local_images = [
     'panel.jpg', 'industrial2.jpg', 'tienda-bg2.jpg', 'tendido.jpg', 'ingeniero2.jpg',
-    'prod-copper.jpg', 'grounding.jpg', 'hvac.jpg', 'prod-ac.jpg'
+    'prod-copper.jpg', 'grounding.jpg'
 ]
 
 for img in local_images:
@@ -19,9 +19,6 @@ for img in local_images:
     # Also check for 2025 paths
     old_url2 = 'https://dualingenier.com/wp-content/uploads/2025/04/' + img
     html = html.replace(old_url2, img)
-
-# Corrección 3: mini split product URL (2025)
-html = html.replace('https://dualingenier.com/wp-content/uploads/2025/04/prod-ac.jpg', 'prod-ac.jpg')
 
 with open('dual-ingenieria-v2.html', 'w', encoding='utf-8') as f:
     f.write(html)
