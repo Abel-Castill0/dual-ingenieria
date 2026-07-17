@@ -1,28 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.dualingenieria.pe"
-        }
-      ],
-      "destination": "https://dualingenieria.pe/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.dualingenieria.com"
-        }
-      ],
-      "destination": "https://dualingenieria.com/:path*",
-      "permanent": true
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
