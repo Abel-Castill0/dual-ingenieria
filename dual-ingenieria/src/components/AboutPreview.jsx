@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -50,16 +51,13 @@ const values = [
 export default function AboutPreview() {
   const sectionRef = useRef(null);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".ap-reveal",
-        { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, stagger: 0.12, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 75%" } }
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+  useGSAP(() => {
+    gsap.fromTo(
+      ".ap-reveal",
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, stagger: 0.12, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 75%" } }
+    );
+  }, { scope: sectionRef });
 
   return (
     <section ref={sectionRef} className="relative py-24 lg:py-32 bg-white overflow-hidden">
@@ -103,7 +101,7 @@ export default function AboutPreview() {
             <div className="ap-reveal mt-10 grid grid-cols-2 gap-3">
               {values.map((v) => (
                 <div key={v.title} className="flex gap-3 p-3.5 rounded-2xl bg-navy-50/60 border border-navy-100 hover:bg-navy-50 transition-colors duration-300">
-                  <div className="mt-0.5 w-9 h-9 rounded-xl bg-gradient-to-br from-navy-500 to-navy-400 flex items-center justify-center text-white flex-shrink-0">
+                  <div className="mt-0.5 w-9 h-9 rounded-xl bg-electric flex items-center justify-center text-white flex-shrink-0">
                     {v.icon}
                   </div>
                   <div>
@@ -117,7 +115,7 @@ export default function AboutPreview() {
             <div className="ap-reveal mt-8">
               <Link
                 href="/nosotros"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-navy-500 hover:text-navy-600 transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-electric hover:text-copper transition-colors"
               >
                 Conoce más sobre nosotros
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

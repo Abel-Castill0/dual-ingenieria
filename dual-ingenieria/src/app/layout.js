@@ -1,5 +1,8 @@
 import { Geist } from "next/font/google";
 import "./globals.css";
+import ScrollReset from "@/components/ScrollReset";
+import ScrollTriggerRefresh from "@/components/ScrollTriggerRefresh";
+import { CartProvider } from "@/context/CartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,8 +48,6 @@ export const metadata = {
   },
 };
 
-import ScrollReset from "@/components/ScrollReset";
-
 export default function RootLayout({ children }) {
   return (
     <html lang="es" className={`${geistSans.variable}`}>
@@ -54,8 +55,11 @@ export default function RootLayout({ children }) {
         <link rel="canonical" href="https://dualingenieria.com" />
       </head>
       <body className="antialiased min-h-screen flex flex-col bg-surf text-ink">
-        <ScrollReset />
-        {children}
+        <CartProvider>
+          <ScrollReset />
+          <ScrollTriggerRefresh />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

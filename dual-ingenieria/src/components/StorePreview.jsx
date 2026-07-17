@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import products from "@/lib/products";
@@ -15,16 +16,13 @@ export default function StorePreview() {
   const { toggleItem } = useCart();
   const [added, setAdded] = useState({});
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".cp-reveal",
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 75%" } }
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+  useGSAP(() => {
+    gsap.fromTo(
+      ".cp-reveal",
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, stagger: 0.06, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 75%" } }
+    );
+  }, { scope: sectionRef });
 
   const handleAdd = (product) => {
     toggleItem(product);
@@ -51,7 +49,7 @@ export default function StorePreview() {
           </div>
           <Link
             href="/tienda"
-            className="px-5 py-3 bg-navy-950 text-white font-semibold rounded-2xl hover:bg-navy-800 transition-all duration-300 shadow-lg text-sm"
+            className="px-5 py-3 bg-electric text-white font-semibold rounded-2xl hover:bg-electric-dark transition-all duration-300 shadow-lg shadow-electric/20 text-sm"
           >
             Ver Tienda Completa
           </Link>

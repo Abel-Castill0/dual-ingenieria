@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import products, { categories } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
+import PageHero from "@/components/PageHero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,16 +21,13 @@ export default function StoreContent() {
 
   const filtered = activeCat === "all" ? products : products.filter((p) => p.cat === activeCat);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".c-reveal",
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.04, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 80%" } }
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+  useGSAP(() => {
+    gsap.fromTo(
+      ".c-reveal",
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, stagger: 0.04, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 80%" } }
+    );
+  }, { scope: sectionRef });
 
   const handleAdd = (product) => {
     toggleItem(product);
@@ -38,31 +37,12 @@ export default function StoreContent() {
 
   return (
     <>
-      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-20 bg-navy-950 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/subestacion.jpg"
-            alt="Tienda de productos eléctricos - Dual Ingeniería"
-            fill
-            className="object-cover opacity-15"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-navy-950/95 via-navy-950/85 to-navy-900/90" />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <div className="h-1 w-14 bg-gradient-to-r from-navy-400 to-copper rounded-full mb-5" />
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Tienda de <span className="text-gradient">Productos</span>
-            </h1>
-            <p className="mt-5 text-lg sm:text-xl text-navy-200/70 leading-relaxed">
-              Agrega los productos que necesitas y recibe tu cotización personalizada
-              por WhatsApp en minutos.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Productos Eléctricos"
+        subtitle="Agrega los productos que necesitas y recibe tu cotización personalizada por WhatsApp en minutos."
+        accentColor="copper"
+        decoration="line"
+      />
 
       <section ref={sectionRef} className="py-14 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -85,8 +65,8 @@ export default function StoreContent() {
                     onClick={() => { setActiveCat(cat.id); setMobileCatOpen(false); }}
                     className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                       activeCat === cat.id
-                        ? "bg-navy-500 text-white shadow-md"
-                        : "text-navy-600/70 hover:bg-navy-50 hover:text-navy-700"
+                        ? "bg-electric text-white shadow-md"
+                        : "text-navy-600/70 hover:bg-electric/10 hover:text-electric"
                     }`}
                   >
                     {cat.name}
@@ -132,7 +112,7 @@ export default function StoreContent() {
                           className={`w-full py-2 text-xs font-semibold rounded-xl transition-all duration-300 ${
                             added[product.id]
                               ? "bg-emerald-500 text-white"
-                              : "bg-navy-50 text-navy-600 hover:bg-navy-500 hover:text-white"
+                              : "bg-electric/10 text-electric hover:bg-electric hover:text-white"
                           }`}
                         >
                           {added[product.id] ? "✓ Agregado" : "Agregar a Cotización"}

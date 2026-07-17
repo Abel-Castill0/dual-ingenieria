@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import PageHero from "@/components/PageHero";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -25,16 +27,13 @@ export default function ContactContent() {
   const [errors, setErrors] = useState({});
   const [sent, setSent] = useState(false);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".co-reveal",
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 80%" } }
-      );
-    }, sectionRef);
-    return () => ctx.revert();
-  }, []);
+  useGSAP(() => {
+    gsap.fromTo(
+      ".co-reveal",
+      { y: 40, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, stagger: 0.08, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 80%" } }
+    );
+  }, { scope: sectionRef });
 
   const sanitize = (str) => str.replace(/[<>]/g, "").replace(/javascript:/gi, "").replace(/on\w+=/gi, "").trim();
 
@@ -70,31 +69,12 @@ export default function ContactContent() {
 
   return (
     <>
-      <section className="relative pt-32 pb-16 lg:pt-40 lg:pb-20 bg-navy-950 overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/tendido.jpg"
-            alt="Contacto - Dual Ingeniería"
-            fill
-            className="object-cover opacity-15"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-navy-950/95 via-navy-950/85 to-navy-900/90" />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <div className="h-1 w-14 bg-gradient-to-r from-navy-400 to-copper rounded-full mb-5" />
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-              Contáctanos para tu <span className="text-gradient">proyecto</span>
-            </h1>
-            <p className="mt-5 text-lg sm:text-xl text-navy-200/70 leading-relaxed">
-              Cuéntanos sobre tu proyecto y te enviaremos una cotización personalizada
-              en las próximas 24 horas.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        title="Contacto"
+        subtitle="Cuéntanos sobre tu proyecto y te enviaremos una cotización personalizada en las próximas 24 horas."
+        accentColor="electric"
+        decoration="line"
+      />
 
       <section ref={sectionRef} className="py-14 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,7 +91,7 @@ export default function ContactContent() {
                 { label: "Ubicación", value: "Lima, Perú", sub: "Atendemos proyectos en todo Lima y provincias" },
               ].map((info) => (
                 <div key={info.label} className="co-reveal flex items-start gap-4 p-4 rounded-2xl bg-navy-50/60 border border-navy-100">
-                  <div className="w-10 h-10 rounded-xl bg-navy-500/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-electric/10 flex items-center justify-center flex-shrink-0">
                     <svg className="w-5 h-5 text-navy-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d={
                         info.label === "Email Proyectos"
@@ -172,7 +152,7 @@ export default function ContactContent() {
                   <textarea id="coMsg" rows={4} value={form.message} onChange={update("message")} className="w-full px-4 py-3 bg-white border border-navy-200 rounded-xl text-navy-900 placeholder-navy-400/50 focus:outline-none focus:border-navy-400 transition-colors text-sm resize-none" placeholder="Cuéntanos sobre tu proyecto en detalle..." maxLength={2000} />
                 </div>
 
-                <button type="submit" className="w-full py-3.5 bg-gradient-to-r from-navy-500 to-navy-400 text-white font-semibold rounded-2xl shadow-lg shadow-navy-500/20 hover:shadow-navy-500/35 hover:-translate-y-0.5 transition-all duration-300 text-sm">
+                <button type="submit" className="w-full py-3.5 bg-electric text-white font-semibold rounded-2xl shadow-lg shadow-electric/20 hover:bg-electric-dark hover:shadow-electric/30 hover:-translate-y-0.5 transition-all duration-300 text-sm">
                   {sent ? "✓ Mensaje Enviado" : "Enviar Cotización"}
                 </button>
               </form>

@@ -1,4 +1,3 @@
-import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -17,7 +16,7 @@ export const metadata = {
 
 export default function ServiciosPage() {
   return (
-    <CartProvider>
+    <>
       <Navbar />
       <CartDrawer />
       <main>
@@ -25,6 +24,6 @@ export default function ServiciosPage() {
       </main>
       <Footer />
       <WhatsAppButton />
-    </CartProvider>
+    </>
   );
 }

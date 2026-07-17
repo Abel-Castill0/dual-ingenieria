@@ -1,10 +1,15 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HeroScene = dynamic(() => import("@/components/HeroScene"), {
   ssr: false,
@@ -31,52 +36,36 @@ export default function HeroSection() {
   const sectionRef = useRef(null);
   const [sceneOpacity, setSceneOpacity] = useState(1);
   const progressRef = useRef(0);
+  const stRef = useRef(null);
 
-  useEffect(() => {
-    const isDesktop = window.innerWidth > 768;
-    if (!isDesktop) return;
+  useGSAP(() => {
+    if (window.innerWidth <= 768) return;
 
-    let gsap, ScrollTrigger;
-    async function loadGsap() {
-      const mod = await import("gsap");
-      const stMod = await import("gsap/ScrollTrigger");
-      gsap = mod.default;
-      ScrollTrigger = stMod.ScrollTrigger;
-      gsap.registerPlugin(ScrollTrigger);
-      init();
-    }
+    stRef.current = ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top top",
+      end: "+=80%",
+      pin: true,
+      scrub: 0.8,
+      onUpdate: (self) => {
+        progressRef.current = self.progress;
+        setSceneOpacity(1 - self.progress);
+      },
+    });
 
-    function init() {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=100%",
-        scrub: 1,
-        onUpdate: (self) => {
-          progressRef.current = self.progress;
-          setSceneOpacity(1 - self.progress);
-        },
-      });
-
-      ScrollTrigger.refresh();
-    }
-
-    loadGsap();
+    ScrollTrigger.refresh();
 
     return () => {
-      import("gsap/ScrollTrigger").then((mod) => {
-        const st = mod.ScrollTrigger;
-        st.getAll().forEach((t) => t.kill());
-      });
+      if (stRef.current) stRef.current.kill();
     };
-  }, []);
+  }, { scope: sectionRef });
 
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-screen md:h-[200vh] bg-[#0a1128]"
+      className="relative w-full min-h-[100svh] overflow-hidden bg-[#0a1128]"
     >
-      <div className="absolute md:fixed inset-0 pointer-events-none select-none">
+      <div className="absolute inset-0 pointer-events-none select-none">
         <Image
           src="/images/subestacion.jpg"
           alt=""
@@ -88,14 +77,14 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#0a1128]/95 via-[#0a1128]/80 to-[#0a1128]/90" />
       </div>
 
-      <div className="hidden md:block fixed inset-0 z-[1] pointer-events-none select-none">
+      <div className="absolute inset-0 z-0 hidden md:block pointer-events-none select-none">
         <HeroScene
           progressRef={progressRef}
           opacity={sceneOpacity}
         />
       </div>
 
-      <div className="relative md:sticky md:top-0 min-h-screen z-10 flex items-end pb-16 md:pb-20 lg:pb-28 overflow-hidden">
+      <div className="relative z-10 flex items-end min-h-[100svh] pb-16 md:pb-20 lg:pb-28">
         <motion.div
           className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
           variants={containerVariants}
@@ -155,8 +144,6 @@ export default function HeroSection() {
           </motion.div>
         </div>
       </div>
-
-      <div className="hidden md:block relative z-10 h-screen pointer-events-none select-none" />
     </section>
   );
 }

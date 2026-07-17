@@ -1,4 +1,3 @@
-import { CartProvider } from "@/context/CartContext";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import StatsBand from "@/components/StatsBand";
@@ -12,7 +11,7 @@ import CartDrawer from "@/components/CartDrawer";
 
 export default function Home() {
   return (
-    <CartProvider>
+    <>
       <Navbar />
       <CartDrawer />
       <main>
@@ -25,6 +24,6 @@ export default function Home() {
       </main>
       <Footer />
       <WhatsAppButton />
-    </CartProvider>
+    </>
   );
 }
