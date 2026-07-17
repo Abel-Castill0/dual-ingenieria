@@ -75,7 +75,7 @@ export default function AboutPreview() {
 
             <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-navy-900/15">
               <Image
-                src="/images/ingeniero2.jpg"
+                src="/images/ingeniero2.webp"
                 alt="Equipo de Dual Ingeniería en campo"
                 width={800}
                 height={560}

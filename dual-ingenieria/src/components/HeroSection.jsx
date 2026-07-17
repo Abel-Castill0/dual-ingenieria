@@ -56,7 +56,7 @@ export default function HeroSection() {
       {/* Background image + gradient */}
       <div className="absolute inset-0 pointer-events-none select-none">
         <Image
-          src="/images/subestacion.jpg"
+          src="/images/subestacion.webp"
           alt=""
           fill
           className="object-cover opacity-[0.10]"

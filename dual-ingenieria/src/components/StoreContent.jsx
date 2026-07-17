@@ -38,43 +38,60 @@ export default function StoreContent() {
   return (
     <>
       <PageHero
-        title="Productos Eléctricos"
+        label="Catálogo"
+        title="Productos Eléctricos."
         subtitle="Agrega los productos que necesitas y recibe tu cotización personalizada por WhatsApp en minutos."
-        accentColor="copper"
-        decoration="line"
       />
 
-      <section ref={sectionRef} className="py-14 lg:py-20 bg-white">
+      <section ref={sectionRef} className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-8">
-            <div className="lg:w-56 flex-shrink-0">
+          <div className="flex flex-col lg:flex-row gap-10">
+
+            {/* Sidebar */}
+            <aside className="lg:w-60 flex-shrink-0">
+              {/* Mobile toggle */}
               <button
                 onClick={() => setMobileCatOpen(!mobileCatOpen)}
-                className="lg:hidden w-full px-4 py-3 bg-navy-50 rounded-xl text-sm font-medium text-navy-800 flex items-center justify-between mb-4"
+                className="lg:hidden w-full px-4 py-3 rounded-xl text-sm font-medium text-navy-800 flex items-center justify-between mb-4"
+                style={{ background: "rgba(14,31,61,0.05)", border: "1px solid rgba(14,31,61,0.08)" }}
               >
                 {categories.find((c) => c.id === activeCat)?.name || "Categorías"}
-                <svg className={`w-4 h-4 text-navy-500 transition-transform ${mobileCatOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg
+                  className={`w-4 h-4 text-navy-500 transition-transform ${mobileCatOpen ? "rotate-180" : ""}`}
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               <div className={`space-y-1 ${mobileCatOpen ? "block" : "hidden"} lg:block`}>
-                {categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    onClick={() => { setActiveCat(cat.id); setMobileCatOpen(false); }}
-                    className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                      activeCat === cat.id
-                        ? "bg-electric text-white shadow-md"
-                        : "text-navy-600/70 hover:bg-electric/10 hover:text-electric"
-                    }`}
-                  >
-                    {cat.name}
-                  </button>
-                ))}
+                {categories.map((cat) => {
+                  const isActive = activeCat === cat.id;
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => { setActiveCat(cat.id); setMobileCatOpen(false); }}
+                      className="w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200"
+                      style={
+                        isActive
+                          ? {
+                              background: "linear-gradient(135deg, #c2855e, #a06a47)",
+                              color: "#fff",
+                              boxShadow: "0 4px 14px rgba(194,133,94,0.3)",
+                            }
+                          : {
+                              color: "rgba(10,25,41,0.6)",
+                            }
+                      }
+                    >
+                      {cat.name}
+                    </button>
+                  );
+                })}
               </div>
-            </div>
+            </aside>
 
+            {/* Grid */}
             <div className="flex-1">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 <AnimatePresence mode="popLayout">
@@ -82,13 +99,18 @@ export default function StoreContent() {
                     <motion.div
                       key={product.id}
                       layout
-                      initial={{ opacity: 0, scale: 0.9 }}
+                      initial={{ opacity: 0, scale: 0.92 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.25 }}
-                      className="c-reveal group bg-white rounded-2xl border border-navy-100 overflow-hidden hover:shadow-xl hover:shadow-navy-500/5 hover:border-navy-200 hover:-translate-y-1 transition-all duration-300"
+                      exit={{ opacity: 0, scale: 0.92 }}
+                      transition={{ duration: 0.22 }}
+                      className="c-reveal group flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-navy-500/8"
+                      style={{ border: "1px solid rgba(14,31,61,0.08)", background: "#fff" }}
                     >
-                      <div className="relative h-40 bg-navy-50/40 overflow-hidden">
+                      {/* Image */}
+                      <div
+                        className="relative h-40 overflow-hidden flex-shrink-0"
+                        style={{ background: "rgba(14,31,61,0.03)" }}
+                      >
                         <Image
                           src={product.img}
                           alt={`${product.name} - Producto Dual Ingeniería`}
@@ -97,23 +119,41 @@ export default function StoreContent() {
                           sizes="(max-width: 640px) 50vw, 25vw"
                         />
                       </div>
-                      <div className="p-4">
-                        <div className="text-[11px] font-medium text-navy-400 mb-1 uppercase tracking-wider">
+
+                      {/* Body */}
+                      <div className="p-4 flex flex-col flex-1">
+                        <div
+                          className="text-[10px] font-semibold uppercase tracking-wider mb-1.5"
+                          style={{ color: "#c2855e" }}
+                        >
                           {product.catName}
                         </div>
                         <h2 className="text-sm font-semibold text-navy-900 leading-snug mb-2 line-clamp-2">
                           {product.name}
                         </h2>
-                        <p className="text-xs text-navy-500/60 leading-relaxed mb-3 line-clamp-2">
+                        <p className="text-xs text-navy-500/60 leading-relaxed line-clamp-2 flex-1">
                           {product.desc}
                         </p>
                         <button
                           onClick={() => handleAdd(product)}
-                          className={`w-full py-2 text-xs font-semibold rounded-xl transition-all duration-300 ${
+                          className="mt-3 w-full py-2 text-xs font-semibold rounded-xl transition-all duration-300"
+                          style={
                             added[product.id]
-                              ? "bg-emerald-500 text-white"
-                              : "bg-electric/10 text-electric hover:bg-electric hover:text-white"
-                          }`}
+                              ? { background: "#10b981", color: "#fff" }
+                              : { background: "rgba(194,133,94,0.1)", color: "#a06a47" }
+                          }
+                          onMouseEnter={(e) => {
+                            if (!added[product.id]) {
+                              e.currentTarget.style.background = "linear-gradient(135deg, #c2855e, #a06a47)";
+                              e.currentTarget.style.color = "#fff";
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!added[product.id]) {
+                              e.currentTarget.style.background = "rgba(194,133,94,0.1)";
+                              e.currentTarget.style.color = "#a06a47";
+                            }
+                          }}
                         >
                           {added[product.id] ? "✓ Agregado" : "Agregar a Cotización"}
                         </button>
