@@ -3,29 +3,31 @@ import "./globals.css";
 import ScrollReset from "@/components/ScrollReset";
 import ScrollTriggerRefresh from "@/components/ScrollTriggerRefresh";
 import { CartProvider } from "@/context/CartContext";
+import LenisProvider from "@/components/LenisProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
   title: "Dual Ingeniería | Ingeniería Eléctrica en Lima, Perú",
   description:
-    "Especialistas en proyectos eléctricos integrales: estudios, subestaciones, mantenimiento industrial, instalaciones, puesta a tierra y más en Lima y todo Perú.",
+    "Especialistas en proyectos eléctricos integrales: estudios, subestaciones, mantenimiento industrial, instalaciones y puesta a tierra en Lima y todo el Perú.",
   keywords: [
     "ingeniería eléctrica", "Lima", "Perú", "subestaciones",
     "mantenimiento industrial", "instalaciones eléctricas",
     "puesta a tierra", "INDECI", "ITSE", "Dual Ingeniería",
-    "proyectos eléctricos", "ingenieros en Lima",
+    "proyectos eléctricos", "ingenieros Lima", "estudios eléctricos",
   ],
-  authors: [{ name: "Dual Ingeniería", url: "https://dualingenieria.com" }],
-  metadataBase: new URL("https://dualingenieria.com"),
+  authors: [{ name: "Dual Ingeniería", url: "https://www.dualingenieria.pe" }],
+  metadataBase: new URL("https://www.dualingenieria.pe"),
   openGraph: {
     title: "Dual Ingeniería | Ingeniería Eléctrica en Lima, Perú",
     description:
-      "Soluciones integrales en ingeniería eléctrica para proyectos comerciales, industriales y de infraestructura.",
-    url: "https://dualingenieria.com",
+      "Soluciones integrales en ingeniería eléctrica para proyectos comerciales, industriales y de infraestructura en Lima, Perú.",
+    url: "https://www.dualingenieria.pe",
     siteName: "Dual Ingeniería",
     locale: "es_PE",
     type: "website",
@@ -52,13 +54,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es" className={`${geistSans.variable}`}>
       <head>
-        <link rel="canonical" href="https://dualingenieria.com" />
+        <link rel="canonical" href="https://www.dualingenieria.pe" />
       </head>
-      <body className="antialiased min-h-screen flex flex-col bg-surf text-ink">
+      <body className="antialiased min-h-screen flex flex-col bg-white text-ink">
         <CartProvider>
-          <ScrollReset />
-          <ScrollTriggerRefresh />
-          {children}
+          <LenisProvider>
+            <ScrollReset />
+            <ScrollTriggerRefresh />
+            {children}
+          </LenisProvider>
         </CartProvider>
       </body>
     </html>

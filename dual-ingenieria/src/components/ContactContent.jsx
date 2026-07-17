@@ -86,7 +86,7 @@ export default function ContactContent() {
               </div>
 
               {[
-                { label: "Email Proyectos", value: "proyectos@dualingenieria.com", sub: "Consultas técnicas y propuestas" },
+                { label: "Email Proyectos", value: "proyectos@dualingenieria.pe", sub: "Consultas técnicas y propuestas" },
                 { label: "Teléfono", value: "+51 973 042 657", sub: "Lun - Vie, 8:00 am - 6:00 pm" },
                 { label: "Ubicación", value: "Lima, Perú", sub: "Atendemos proyectos en todo Lima y provincias" },
               ].map((info) => (
