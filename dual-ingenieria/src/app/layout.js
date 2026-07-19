@@ -1,4 +1,5 @@
 import { Inter, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import ScrollReset from "@/components/ScrollReset";
 import ScrollTriggerRefresh from "@/components/ScrollTriggerRefresh";
@@ -122,6 +123,29 @@ export default function RootLayout({ children }) {
             {children}
           </LenisProvider>
         </CartProvider>
+
+        {/*
+          Google Analytics 4
+          Para activar: agrega NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX en .env.local
+          y en Vercel → Settings → Environment Variables.
+          Obtén el ID en: https://analytics.google.com
+        */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+              `}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );
