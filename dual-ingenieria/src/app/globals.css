@@ -211,6 +211,16 @@ body {
   will-change: background-position;
 }
 
+/* ─── FORM FEEDBACK FADE-IN ──────────────────── */
+@keyframes fade-in-soft {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-error {
+  animation: fade-in-soft 0.25s ease-out;
+}
+
 /* ─── TRUSTBAR MARQUEE ───────────────────────── */
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
