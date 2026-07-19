@@ -104,13 +104,12 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-20">
 
             {/* Logo */}
-            {/* TODO: Reemplazar logo actual por versión SVG o PNG con transparencia real (sin fondo blanco) */}
             <Link href="/" className="flex items-center gap-3 group">
               <Image
-                src="/images/logod.webp"
+                src="/images/logo-transparente.png"
                 alt="Dual Ingeniería"
-                width={140}
-                height={73}
+                width={92}
+                height={48}
                 className="object-contain h-11 w-auto md:h-12"
                 priority
               />
