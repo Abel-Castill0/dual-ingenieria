@@ -54,9 +54,9 @@ export default function Footer() {
               <Image
                 src="/images/logod.webp"
                 alt="Dual Ingeniería"
-                width={40}
+                width={77}
                 height={40}
-                className="object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+                className="object-contain h-10 w-auto opacity-90 group-hover:opacity-100 transition-opacity"
               />
               <div>
                 <span className="text-base font-bold text-white block leading-tight">Dual Ingeniería</span>

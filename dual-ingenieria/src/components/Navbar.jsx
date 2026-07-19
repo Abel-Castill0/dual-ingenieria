@@ -109,8 +109,8 @@ export default function Navbar() {
               <Image
                 src="/images/logod.webp"
                 alt="Dual Ingeniería"
-                width={48}
-                height={48}
+                width={140}
+                height={73}
                 className="object-contain h-11 w-auto md:h-12"
                 priority
               />
