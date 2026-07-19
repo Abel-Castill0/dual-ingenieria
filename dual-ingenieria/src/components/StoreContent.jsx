@@ -9,6 +9,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import products, { categories } from "@/lib/products";
 import { useCart } from "@/context/CartContext";
 import PageHero from "@/components/PageHero";
+import TiltCard from "@/components/TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,61 +104,51 @@ export default function StoreContent() {
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.92 }}
                       transition={{ duration: 0.22 }}
-                      className="c-reveal group flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-navy-500/8"
-                      style={{ border: "1px solid rgba(14,31,61,0.08)", background: "#fff" }}
                     >
-                      {/* Image */}
-                      <div
-                        className="relative h-40 overflow-hidden flex-shrink-0"
-                        style={{ background: "rgba(14,31,61,0.03)" }}
-                      >
-                        <Image
-                          src={product.img}
-                          alt={`${product.name} - Producto Dual Ingeniería`}
-                          fill
-                          className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                          sizes="(max-width: 640px) 50vw, 25vw"
-                        />
-                      </div>
+                      <TiltCard className="c-reveal group flex flex-col rounded-2xl overflow-hidden transition-[box-shadow] duration-300 hover:shadow-xl hover:shadow-navy-500/8 h-full"
+                        >
+                        <div style={{ border: "1px solid rgba(14,31,61,0.08)", background: "#fff", borderRadius: "1rem", overflow: "hidden", display: "flex", flexDirection: "column", height: "100%" }}>
+                          {/* Image */}
+                          <div
+                            className="relative h-40 overflow-hidden flex-shrink-0"
+                            style={{ background: "rgba(14,31,61,0.03)" }}
+                          >
+                            <Image
+                              src={product.img}
+                              alt={`${product.name} - Producto Dual Ingeniería`}
+                              fill
+                              className="object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                            />
+                          </div>
 
-                      {/* Body */}
-                      <div className="p-4 flex flex-col flex-1">
-                        <div
-                          className="text-[10px] font-semibold uppercase tracking-wider mb-1.5"
-                          style={{ color: "#c2855e" }}
-                        >
-                          {product.catName}
+                          {/* Body */}
+                          <div className="p-4 flex flex-col flex-1">
+                            <div
+                              className="text-[10px] font-semibold uppercase tracking-wider mb-1.5"
+                              style={{ color: "#c2855e" }}
+                            >
+                              {product.catName}
+                            </div>
+                            <h2 className="text-sm font-semibold text-navy-900 leading-snug mb-2 line-clamp-2">
+                              {product.name}
+                            </h2>
+                            <p className="text-xs text-navy-500/60 leading-relaxed line-clamp-2 flex-1">
+                              {product.desc}
+                            </p>
+                            <button
+                              onClick={() => handleAdd(product)}
+                              className={`mt-3 w-full py-2 text-xs font-semibold rounded-xl transition-all duration-300 ${
+                                added[product.id]
+                                  ? "bg-emerald-500 text-white"
+                                  : "copper-shimmer-btn text-white"
+                              }`}
+                            >
+                              {added[product.id] ? "✓ Agregado" : "Agregar a Cotización"}
+                            </button>
+                          </div>
                         </div>
-                        <h2 className="text-sm font-semibold text-navy-900 leading-snug mb-2 line-clamp-2">
-                          {product.name}
-                        </h2>
-                        <p className="text-xs text-navy-500/60 leading-relaxed line-clamp-2 flex-1">
-                          {product.desc}
-                        </p>
-                        <button
-                          onClick={() => handleAdd(product)}
-                          className="mt-3 w-full py-2 text-xs font-semibold rounded-xl transition-all duration-300"
-                          style={
-                            added[product.id]
-                              ? { background: "#10b981", color: "#fff" }
-                              : { background: "rgba(194,133,94,0.1)", color: "#a06a47" }
-                          }
-                          onMouseEnter={(e) => {
-                            if (!added[product.id]) {
-                              e.currentTarget.style.background = "linear-gradient(135deg, #c2855e, #a06a47)";
-                              e.currentTarget.style.color = "#fff";
-                            }
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!added[product.id]) {
-                              e.currentTarget.style.background = "rgba(194,133,94,0.1)";
-                              e.currentTarget.style.color = "#a06a47";
-                            }
-                          }}
-                        >
-                          {added[product.id] ? "✓ Agregado" : "Agregar a Cotización"}
-                        </button>
-                      </div>
+                      </TiltCard>
                     </motion.div>
                   ))}
                 </AnimatePresence>

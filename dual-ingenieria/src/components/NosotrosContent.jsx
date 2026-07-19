@@ -100,14 +100,14 @@ export default function NosotrosContent() {
         subtitle="Conoce la historia, los valores y el equipo que hacen de Dual Ingeniería un referente en ingeniería eléctrica."
       />
 
-      <section ref={sectionRef} className="py-24 lg:py-32 bg-white">
+      <section ref={sectionRef} className="py-12 md:py-20 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* Historia */}
           <div className="grid lg:grid-cols-2 gap-16 items-center mb-28">
             <div>
               <div className="n-reveal section-label mb-5">Nuestra Historia</div>
-              <h2 className="n-reveal text-[clamp(1.7rem,3.5vw,2.6rem)] font-bold text-navy-950 leading-tight">
+              <h2 className="n-reveal text-[clamp(2rem,4.5vw,3.5rem)] font-bold text-navy-950 leading-tight">
                 Más de 12 años construyendo <span style={{ color: "#c2855e" }}>confianza</span> y resultados.
               </h2>
               <div
@@ -138,6 +138,7 @@ export default function NosotrosContent() {
                 alt="Proyecto industrial de Dual Ingeniería"
                 width={700}
                 height={500}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="w-full h-[380px] object-cover rounded-3xl shadow-2xl shadow-navy-900/20 relative"
               />
               {/* Stat chip */}
@@ -155,7 +156,7 @@ export default function NosotrosContent() {
           <div className="mb-28">
             <div className="n-reveal text-center mb-14">
               <div className="section-label justify-center mb-4">Nuestros Valores</div>
-              <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-bold text-navy-950">
+              <h2 className="text-[clamp(1.9rem,4vw,3rem)] font-bold text-navy-950">
                 Los principios que guían cada proyecto.
               </h2>
             </div>
@@ -191,7 +192,7 @@ export default function NosotrosContent() {
           <div>
             <div className="n-reveal text-center mb-14">
               <div className="section-label justify-center mb-4">Nuestro Equipo</div>
-              <h2 className="text-[clamp(1.6rem,3vw,2.4rem)] font-bold text-navy-950">
+              <h2 className="text-[clamp(1.9rem,4vw,3rem)] font-bold text-navy-950">
                 Profesionales certificados a tu servicio.
               </h2>
             </div>
@@ -203,6 +204,7 @@ export default function NosotrosContent() {
                       src={m.img}
                       alt={m.name}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-navy-950/75 via-navy-950/10 to-transparent" />

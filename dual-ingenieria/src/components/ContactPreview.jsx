@@ -1,12 +1,30 @@
 "use client";
 
+/*
+  ─── EMAILJS SETUP (3 pasos) ────────────────────────────────────────────────
+  1. Crea cuenta en https://www.emailjs.com (plan gratuito: 200 emails/mes)
+  2. Crea un Email Service (Gmail / SMTP) y un Email Template con estas variables:
+       {{from_name}}, {{from_email}}, {{phone}}, {{type}}, {{message}}
+  3. Crea el archivo .env.local en la raíz del proyecto con:
+       NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_xxxxxxx
+       NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_xxxxxxx
+       NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxxxxxx
+  ─────────────────────────────────────────────────────────────────────────────
+*/
+
 import { useRef, useState } from "react";
-import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const SERVICE_ID  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID  || "YOUR_SERVICE_ID";
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID";
+const PUBLIC_KEY  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY  || "YOUR_PUBLIC_KEY";
 
 const serviceOptions = [
   "Cotización de Proyecto Eléctrico",
@@ -20,14 +38,33 @@ const serviceOptions = [
   "Otro",
 ];
 
+const schema = yup.object({
+  name: yup.string().trim().required("Requerido").min(2, "Muy corto"),
+  email: yup.string().trim().required("Requerido").email("Email inválido"),
+  phone: yup.string().trim().required("Requerido").min(6, "Teléfono inválido"),
+  type: yup.string().required("Selecciona una opción"),
+  message: yup.string().max(2000, "Máximo 2000 caracteres"),
+}).required();
+
 const inputCls =
-  "w-full px-4 py-3.5 bg-navy-800/60 border border-navy-700/50 rounded-xl text-white placeholder-navy-400/50 focus:outline-none focus:border-copper/50 focus:bg-navy-800/80 transition-all duration-200 text-sm";
+  "w-full bg-transparent border-0 border-b border-white/20 focus:border-copper focus:outline-none text-white placeholder-white/30 text-sm py-3 px-0 transition-colors duration-200";
+
+const sanitize = (s = "") =>
+  s.replace(/[<>]/g, "").replace(/javascript:/gi, "").replace(/on\w+=/gi, "").trim();
 
 export default function ContactPreview() {
   const sectionRef = useRef(null);
-  const [form, setForm]   = useState({ name: "", email: "", phone: "", type: "", message: "" });
-  const [errors, setErrors] = useState({});
-  const [sent, setSent]   = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { name: "", email: "", phone: "", type: "", message: "" },
+  });
 
   useGSAP(() => {
     gsap.fromTo(
@@ -40,32 +77,50 @@ export default function ContactPreview() {
     );
   }, { scope: sectionRef });
 
-  const sanitize = (s) =>
-    s.replace(/[<>]/g, "").replace(/javascript:/gi, "").replace(/on\w+=/gi, "").trim();
+  const onSubmit = async (data) => {
+    setStatus("sending");
 
-  const validate = () => {
-    const e = {};
-    if (!form.name.trim())  e.name  = "Requerido";
-    if (!form.email.trim()) e.email = "Requerido";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Email inválido";
-    if (!form.phone.trim()) e.phone = "Requerido";
-    if (!form.type)         e.type  = "Selecciona una opción";
-    return e;
-  };
+    const safe = {
+      name: sanitize(data.name),
+      email: sanitize(data.email),
+      phone: sanitize(data.phone),
+      type: sanitize(data.type),
+      message: sanitize(data.message),
+    };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const errs = validate();
-    setErrors(errs);
-    if (Object.keys(errs).length > 0) return;
-    const msg = `Hola,%20soy%20${encodeURIComponent(sanitize(form.name))}%0AEmail:%20${encodeURIComponent(sanitize(form.email))}%0ATel:%20${encodeURIComponent(sanitize(form.phone))}%0AConsulta:%20${encodeURIComponent(sanitize(form.type))}%0A%0A${encodeURIComponent(sanitize(form.message))}`;
+    // ── EmailJS send ──────────────────────────────────────────────────────
+    try {
+      const { default: emailjs } = await import("@emailjs/browser");
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          from_name: safe.name,
+          from_email: safe.email,
+          phone: safe.phone,
+          type: safe.type,
+          message: safe.message || "Sin descripción adicional.",
+        },
+        PUBLIC_KEY
+      );
+      setStatus("success");
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setStatus("error");
+    }
+
+    // ── WhatsApp send (canal de respaldo, siempre se dispara) ─────────────
+    const msg =
+      `Hola,%20soy%20${encodeURIComponent(safe.name)}` +
+      `%0AEmail:%20${encodeURIComponent(safe.email)}` +
+      `%0ATel:%20${encodeURIComponent(safe.phone)}` +
+      `%0AConsulta:%20${encodeURIComponent(safe.type)}` +
+      (safe.message ? `%0A%0A${encodeURIComponent(safe.message)}` : "");
     window.open(`https://api.whatsapp.com/send/?phone=51973042657&text=${msg}`, "_blank", "noopener,noreferrer");
-    setSent(true);
-    setForm({ name: "", email: "", phone: "", type: "", message: "" });
-    setTimeout(() => setSent(false), 5000);
-  };
 
-  const update = (field) => (e) => setForm((p) => ({ ...p, [field]: e.target.value }));
+    reset();
+    setTimeout(() => setStatus("idle"), 6000);
+  };
 
   return (
     <section
@@ -139,49 +194,69 @@ export default function ContactPreview() {
           {/* Form */}
           <div className="lg:col-span-3 ct-reveal">
             <form
-              onSubmit={handleSubmit}
-              className="bg-navy-900/50 border border-navy-800/60 rounded-3xl p-6 sm:p-8 space-y-5 backdrop-blur-sm"
+              onSubmit={handleSubmit(onSubmit)}
+              className="bg-navy-900/50 border border-navy-800/60 rounded-3xl p-6 sm:p-8 space-y-6 backdrop-blur-sm"
               noValidate
             >
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Field label="Nombre *" error={errors.name}>
-                  <input id="cpName" type="text" value={form.name} onChange={update("name")}
+              <div className="grid sm:grid-cols-2 gap-6">
+                <Field label="Nombre *" error={errors.name?.message}>
+                  <input id="cpName" type="text" {...register("name")}
                     className={inputCls} placeholder="Juan Pérez" maxLength={100} />
                 </Field>
-                <Field label="Email *" error={errors.email}>
-                  <input id="cpEmail" type="email" value={form.email} onChange={update("email")}
+                <Field label="Email *" error={errors.email?.message}>
+                  <input id="cpEmail" type="email" {...register("email")}
                     className={inputCls} placeholder="correo@empresa.com" maxLength={200} />
                 </Field>
               </div>
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Field label="Teléfono *" error={errors.phone}>
-                  <input id="cpPhone" type="tel" value={form.phone} onChange={update("phone")}
+              <div className="grid sm:grid-cols-2 gap-6">
+                <Field label="Teléfono *" error={errors.phone?.message}>
+                  <input id="cpPhone" type="tel" {...register("phone")}
                     className={inputCls} placeholder="+51 999 999 999" maxLength={20} />
                 </Field>
-                <Field label="Tipo de consulta *" error={errors.type}>
-                  <select id="cpType" value={form.type} onChange={update("type")}
+                <Field label="Tipo de consulta *" error={errors.type?.message}>
+                  <select id="cpType" {...register("type")}
                     className={`${inputCls} cursor-pointer`}>
-                    <option value="">Selecciona...</option>
-                    {serviceOptions.map((o) => <option key={o} value={o}>{o}</option>)}
+                    <option value="" className="bg-navy-900">Selecciona...</option>
+                    {serviceOptions.map((o) => <option key={o} value={o} className="bg-navy-900">{o}</option>)}
                   </select>
                 </Field>
               </div>
-              <Field label="Mensaje" error={null}>
-                <textarea id="cpMsg" rows={4} value={form.message} onChange={update("message")}
+              <Field label="Mensaje" error={errors.message?.message}>
+                <textarea id="cpMsg" rows={3} {...register("message")}
                   className={`${inputCls} resize-none`}
                   placeholder="Cuéntanos sobre tu proyecto, ubicación, alcance..." maxLength={2000} />
               </Field>
 
               <button
                 type="submit"
-                className="w-full py-4 text-sm font-semibold text-white rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-copper/20 active:translate-y-0"
-                style={{ background: sent ? "#10b981" : "linear-gradient(135deg, #c2855e, #a06a47)" }}
+                disabled={status === "sending"}
+                className="w-full py-4 flex items-center justify-center gap-2 text-sm font-semibold text-white rounded-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-copper/20 active:translate-y-0 disabled:opacity-70 disabled:cursor-not-allowed disabled:translate-y-0"
+                style={{
+                  background:
+                    status === "success" ? "#10b981"
+                    : status === "error" ? "#ef4444"
+                    : "linear-gradient(135deg, #c2855e, #a06a47)",
+                }}
               >
-                {sent ? "¡Mensaje enviado correctamente!" : "Enviar por WhatsApp →"}
+                {status === "sending" && (
+                  <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                    <path className="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                )}
+                {status === "success" && (
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                  </svg>
+                )}
+                {status === "sending" ? "Enviando..."
+                  : status === "success" ? "¡Mensaje enviado correctamente!"
+                  : status === "error" ? "Error — reintenta"
+                  : "Enviar Cotización"}
               </button>
 
               <p className="text-[11px] text-navy-500 text-center">
-                Tu información es tratada con confidencialidad.
+                Tu información es tratada con confidencialidad. Se envía por email y WhatsApp.
               </p>
             </form>
           </div>

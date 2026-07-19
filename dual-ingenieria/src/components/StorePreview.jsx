@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import products from "@/lib/products";
 import { useCart } from "@/context/CartContext";
+import TiltCard from "@/components/TiltCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,9 +75,9 @@ export default function StorePreview() {
         {/* Product grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {featured.map((product) => (
-            <div
+            <TiltCard
               key={product.id}
-              className="sp2-reveal group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-copper/20 hover:shadow-xl hover:shadow-navy-900/6 hover:-translate-y-1 transition-all duration-300"
+              className="sp2-reveal group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:border-copper/20 hover:shadow-xl hover:shadow-navy-900/6 transition-[border-color,box-shadow] duration-300"
             >
               {/* Product image */}
               <div className="relative h-44 bg-gray-50 overflow-hidden">
@@ -85,7 +86,7 @@ export default function StorePreview() {
                   alt={`${product.name} – Dual Ingeniería`}
                   fill
                   className="object-contain p-5 group-hover:scale-107 transition-transform duration-500"
-                  sizes="(max-width: 640px) 50vw, 25vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 />
                 {/* Category badge */}
                 <div className="absolute top-3 left-3">
@@ -107,18 +108,13 @@ export default function StorePreview() {
                   className={`w-full py-2.5 text-xs font-semibold rounded-xl transition-all duration-300 ${
                     added[product.id]
                       ? "bg-emerald-500 text-white"
-                      : "text-white hover:-translate-y-0.5"
+                      : "copper-shimmer-btn text-white hover:-translate-y-0.5"
                   }`}
-                  style={
-                    added[product.id]
-                      ? {}
-                      : { background: "linear-gradient(135deg, #c2855e, #a06a47)" }
-                  }
                 >
                   {added[product.id] ? "✓ Agregado" : "Agregar a cotización"}
                 </button>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </div>

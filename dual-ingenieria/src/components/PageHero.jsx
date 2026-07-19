@@ -8,11 +8,14 @@ export default function PageHero({ title, subtitle, label }) {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline();
-    tl.fromTo(".ph-line",  { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power2.out" })
-      .fromTo(".ph-label", { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }, "-=0.2")
-      .fromTo(".ph-title", { y: 32, opacity: 0 }, { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }, "-=0.25")
-      .fromTo(".ph-sub",   { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power3.out" }, "-=0.35");
+    gsap.set(".ph-title", { yPercent: 110 });
+    gsap.set(".ph-sub, .ph-label", { y: 16, opacity: 0 });
+
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    tl.fromTo(".ph-line", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" })
+      .to(".ph-label", { y: 0, opacity: 1, duration: 0.45 }, "-=0.25")
+      .to(".ph-title", { yPercent: 0, duration: 0.95 }, "-=0.2")
+      .to(".ph-sub", { y: 0, opacity: 1, duration: 0.55 }, "-=0.5");
   }, { scope: containerRef });
 
   return (
@@ -42,9 +45,12 @@ export default function PageHero({ title, subtitle, label }) {
         {label && (
           <div className="ph-label section-label mb-5">{label}</div>
         )}
-        <h1 className="ph-title text-[clamp(2.2rem,6vw,4.5rem)] font-bold text-white leading-[1.06] tracking-tight max-w-3xl">
-          {title}
-        </h1>
+        {/* Máscara de revelado: overflow-hidden recorta el título mientras sube desde abajo */}
+        <div className="overflow-hidden">
+          <h1 className="ph-title text-[clamp(2.2rem,6vw,4.5rem)] font-bold text-white leading-[1.06] tracking-tight max-w-3xl">
+            {title}
+          </h1>
+        </div>
         {subtitle && (
           <p className="ph-sub mt-5 text-[clamp(0.9rem,1.4vw,1.05rem)] text-white/45 max-w-xl leading-relaxed">
             {subtitle}

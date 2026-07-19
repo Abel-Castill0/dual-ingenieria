@@ -79,6 +79,7 @@ export default function AboutPreview() {
                 alt="Equipo de Dual Ingeniería en campo"
                 width={800}
                 height={560}
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="w-full h-[380px] lg:h-[480px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950/60 via-transparent to-transparent" />

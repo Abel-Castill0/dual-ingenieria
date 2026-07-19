@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import TrustBar from "@/components/TrustBar";
 import StatsBand from "@/components/StatsBand";
 import AboutPreview from "@/components/AboutPreview";
 import ServicesPreview from "@/components/ServicesPreview";
@@ -16,6 +17,7 @@ export default function Home() {
       <CartDrawer />
       <main>
         <HeroSection />
+        <TrustBar />
         <StatsBand />
         <AboutPreview />
         <ServicesPreview />

@@ -38,7 +38,7 @@ export default function ServiciosContent() {
         subtitle="Desde el estudio inicial hasta la puesta en servicio y mantenimiento. Siete especialidades bajo un mismo equipo."
       />
 
-      <section ref={sectionRef} className="py-24 lg:py-32 bg-white">
+      <section ref={sectionRef} className="py-12 md:py-20 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="space-y-24">
             {services.map((svc, i) => (
@@ -56,6 +56,7 @@ export default function ServiciosContent() {
                       alt={`${svc.title} - Dual Ingeniería`}
                       width={700}
                       height={480}
+                      sizes="(max-width: 1024px) 100vw, 50vw"
                       className="w-full h-[360px] object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     {/* Dark overlay */}
@@ -78,7 +79,7 @@ export default function ServiciosContent() {
                 {/* Content */}
                 <div>
                   <div className="section-label mb-5">Servicio {svc.num}</div>
-                  <h2 className="text-[clamp(1.5rem,3vw,2.3rem)] font-bold text-navy-950 leading-tight">
+                  <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold text-navy-950 leading-tight">
                     {svc.title}
                   </h2>
                   <p className="mt-5 text-base text-navy-700/65 leading-relaxed">

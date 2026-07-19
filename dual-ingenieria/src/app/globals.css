@@ -2,7 +2,7 @@
 
 @theme inline {
   --color-navy-950: #070d1a;
-  --color-navy-900: #0a1429;
+  --color-navy-900: #0a1128;
   --color-navy-800: #0f1f3d;
   --color-navy-700: #132a52;
   --color-navy-600: #1a3a6b;
@@ -20,8 +20,10 @@
   --color-ember: #e8633a;
   --color-surf:     #ffffff;
   --color-surf-alt: #f8f7f5;
-  --color-ink: #0a1429;
-  --font-sans: var(--font-geist-sans);
+  --color-ice: #f5f7fa;
+  --color-ink: #0a1128;
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 html {
@@ -187,6 +189,47 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* ─── COPPER SHIMMER BUTTON (fondo animado) ─────
+   Anima background-position (no transform/opacity), así que el navegador
+   no puede promoverlo a su propia capa de compositor automáticamente.
+   will-change aísla el repaint a este elemento en vez de invalidar el
+   layout de sus vecinos — aceptable aquí porque es un botón pequeño y
+   poco frecuente, no una animación a pantalla completa. */
+.copper-shimmer-btn {
+  background: linear-gradient(
+    105deg,
+    var(--color-copper-dark) 0%,
+    var(--color-copper) 25%,
+    var(--color-copper-light) 50%,
+    var(--color-copper) 75%,
+    var(--color-copper-dark) 100%
+  );
+  background-size: 250% auto;
+  animation: shimmer-copper 3.5s linear infinite;
+  will-change: background-position;
+}
+
+/* ─── TRUSTBAR MARQUEE ───────────────────────── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }
 
 /* ─── SWIPER CUSTOM ──────────────────────────── */
