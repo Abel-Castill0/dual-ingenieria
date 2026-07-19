@@ -19,13 +19,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: "Dual Ingeniería | Ingeniería Eléctrica en Lima, Perú",
+  title: {
+    default: "Dual Ingeniería | Ingeniería Eléctrica en Lima, Perú",
+    template: "%s | Dual Ingeniería",
+  },
   description:
-    "Especialistas en proyectos eléctricos integrales: estudios, subestaciones, mantenimiento industrial, instalaciones y puesta a tierra en Lima y todo el Perú.",
+    "Especialistas en proyectos eléctricos integrales: estudios, subestaciones, mantenimiento industrial, instalaciones, tableros eléctricos y puesta a tierra en Lima y todo el Perú.",
   keywords: [
-    "ingeniería eléctrica", "Lima", "Perú", "subestaciones",
+    "ingeniería eléctrica Perú", "Lima", "subestaciones eléctricas",
     "mantenimiento industrial", "instalaciones eléctricas",
-    "puesta a tierra", "INDECI", "ITSE", "Dual Ingeniería",
+    "puesta a tierra", "pozo a tierra", "tableros eléctricos",
+    "INDECI", "ITSE", "Dual Ingeniería",
     "proyectos eléctricos", "ingenieros Lima", "estudios eléctricos",
   ],
   authors: [{ name: "Dual Ingeniería", url: "https://www.dualingenieria.pe" }],
@@ -38,11 +42,13 @@ export const metadata = {
     siteName: "Dual Ingeniería",
     locale: "es_PE",
     type: "website",
+    images: [{ url: "/images/og-image.jpg", width: 1200, height: 630, alt: "Dual Ingeniería — Del diseño al encendido" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dual Ingeniería | Ingeniería Eléctrica",
     description: "Especialistas en proyectos eléctricos integrales en Lima y Perú.",
+    images: ["/images/og-image.jpg"],
   },
   robots: { index: true, follow: true },
   icons: {
