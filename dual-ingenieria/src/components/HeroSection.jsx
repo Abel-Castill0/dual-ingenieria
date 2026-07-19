@@ -115,7 +115,9 @@ export default function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-end min-h-[100svh] pb-20 md:pb-24 lg:pb-32">
+      {/* pt-28/32: aunque el contenido es justify-end, en viewports cortos
+          (landscape móvil) evita que el H1 alcance la zona del navbar. */}
+      <div className="relative z-10 flex flex-col justify-end min-h-[100svh] pt-28 md:pt-32 pb-20 md:pb-24 lg:pb-32">
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
           <div className="max-w-xl lg:max-w-[45%]">
 

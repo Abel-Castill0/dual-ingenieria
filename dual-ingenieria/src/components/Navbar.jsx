@@ -60,13 +60,15 @@ export default function Navbar() {
   const { totalItems, setShowCart } = useCart();
 
   const isHomePage  = pathname === "/";
-  const isOverHero  = isHomePage && !scrolled;
+  // Todas las páginas abren con hero navy oscuro (HeroSection o PageHero),
+  // así que el navbar arranca transparente con texto blanco en todas.
+  const isOverHero  = !scrolled;
   const isLight     = !(isOverHero || isDarkBackground);
 
   /* ── scroll + progress ── */
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY >= 50);
       const total    = document.body.scrollHeight - window.innerHeight;
       const progress = total > 0 ? (window.scrollY / total) * 100 : 0;
       setReadProgress(progress);
@@ -107,7 +109,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isLight
-            ? "bg-white/92 backdrop-blur-md border-b border-gray-200/50 shadow-sm"
+            ? "bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm"
             : "bg-transparent"
         }`}
       >
@@ -115,6 +117,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-20">
 
             {/* Logo */}
+            {/* TODO: Reemplazar logo actual por versión SVG o PNG con transparencia real (sin fondo blanco) */}
             <Link href="/" className="flex items-center gap-3 group">
               <Image
                 src="/images/logod.webp"
@@ -180,10 +183,16 @@ export default function Navbar() {
                 <CartBadge count={totalItems} className="-top-2 -right-2 w-5 h-5 text-xs" />
               </button>
 
-              {/* CTA */}
+              {/* CTA — oculto sobre el hero del home (allí ya vive el CTA
+                  principal); en páginas interiores permanece visible porque
+                  PageHero no tiene CTA propio. */}
               <Link
                 href="/contacto"
+                tabIndex={isHomePage && !scrolled ? -1 : 0}
+                aria-hidden={isHomePage && !scrolled}
                 className={`ml-2 px-5 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 ${
+                  isHomePage && !scrolled ? "opacity-0 pointer-events-none" : "opacity-100"
+                } ${
                   isLight
                     ? "bg-navy-950 text-white hover:bg-navy-800 hover:-translate-y-0.5 shadow-lg shadow-navy-950/20"
                     : "bg-copper text-white hover:bg-copper-dark hover:-translate-y-0.5 shadow-lg shadow-copper/30"
