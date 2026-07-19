@@ -288,6 +288,7 @@ export default function Hero3D({ progressRef = { current: 0 }, opacity = 1 }) {
       <Canvas
         camera={{ position: [0, 0, 4.2], fov: 45 }}
         dpr={[1, 1.5]}
+        performance={{ min: 0.5 }}
         gl={{ alpha: true, antialias: true }}
         style={{
           position: "absolute",

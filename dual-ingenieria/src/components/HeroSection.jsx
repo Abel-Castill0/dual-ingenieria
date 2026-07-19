@@ -8,9 +8,12 @@ import dynamic from "next/dynamic";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import useIsMobile from "@/hooks/useIsMobile";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// loading: null — la sección ya es navy-950 con imagen de fondo, un fallback
+// visual extra sería invisible sobre ese mismo fondo.
 const Hero3D = dynamic(() => import("@/components/Hero3D"), {
   ssr: false,
   loading: () => null,
@@ -21,6 +24,7 @@ export default function HeroSection() {
   const ctaRef      = useRef(null);
   const progressRef = useRef(0);
   const [sceneOpacity, setSceneOpacity] = useState(1);
+  const isMobile = useIsMobile();
 
   useGSAP(() => {
     if (window.innerWidth <= 768) return;
@@ -109,10 +113,22 @@ export default function HeroSection() {
         aria-hidden
       />
 
-      {/* 3D Scene */}
-      <div className="absolute inset-0 z-0 pointer-events-none select-none">
-        <Hero3D progressRef={progressRef} opacity={sceneOpacity} />
-      </div>
+      {/* 3D Scene — solo desktop: isMobile === false (no `!isMobile`, que
+          sería true durante el estado null inicial y dispararía la descarga
+          del chunk de Three.js también en móviles). */}
+      {isMobile === false && (
+        <div className="absolute inset-0 z-0 pointer-events-none select-none">
+          <Hero3D progressRef={progressRef} opacity={sceneOpacity} />
+        </div>
+      )}
+
+      {/* Degradación móvil: glow estático cobre, cero JS, cero GPU */}
+      {isMobile === true && (
+        <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center" aria-hidden>
+          {/* TODO: Reemplazar con imagen WebP del tablero 3D */}
+          <div className="w-64 h-64 rounded-full bg-copper/5 blur-3xl" />
+        </div>
+      )}
 
       {/* Content */}
       {/* pt-28/32: aunque el contenido es justify-end, en viewports cortos
