@@ -53,17 +53,18 @@ function CartBadge({ count, className = "" }) {
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [scrolled, setScrolled]           = useState(false);
-  const [mobileOpen, setMobileOpen]       = useState(false);
-  const [isDarkBackground, setIsDarkBackground] = useState(false);
-  const [readProgress, setReadProgress]   = useState(0);
+  const [scrolled, setScrolled]     = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [readProgress, setReadProgress] = useState(0);
   const { totalItems, setShowCart } = useCart();
 
-  const isHomePage  = pathname === "/";
-  // Todas las páginas abren con hero navy oscuro (HeroSection o PageHero),
-  // así que el navbar arranca transparente con texto blanco en todas.
-  const isOverHero  = !scrolled;
-  const isLight     = !(isOverHero || isDarkBackground);
+  const isHomePage = pathname === "/";
+  // Regla única de legibilidad: en el top (todas las páginas abren con hero
+  // navy oscuro) el navbar es transparente con texto blanco; con scroll pasa
+  // a glassmorphism blanco con texto navy. Sin detección de secciones — el
+  // observer anterior dejaba el estado "oscuro" atascado al entrar en
+  // secciones blancas (texto blanco sobre blanco).
+  const isLight = scrolled;
 
   /* ── scroll + progress ── */
   useEffect(() => {
@@ -73,24 +74,10 @@ export default function Navbar() {
       const progress = total > 0 ? (window.scrollY / total) * 100 : 0;
       setReadProgress(progress);
     };
+    onScroll(); // sincroniza al montar: cubre restauración de scroll del navegador
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  /* ── dark-section detection ── */
-  useEffect(() => {
-    if (!isHomePage) { setIsDarkBackground(false); return; }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setIsDarkBackground(e.target.dataset.dark === "true");
-        });
-      },
-      { root: null, rootMargin: "-50% 0px -50% 0px", threshold: 0 }
-    );
-    document.querySelectorAll("[data-dark='true']").forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, [isHomePage]);
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);
 
@@ -109,7 +96,7 @@ export default function Navbar() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isLight
-            ? "bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm"
+            ? "bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm"
             : "bg-transparent"
         }`}
       >
@@ -145,14 +132,14 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative px-4 py-2 text-sm font-medium rounded-xl transition-all duration-200 ${
+                    className={`relative px-4 py-2 text-sm font-medium rounded-xl transition-colors duration-300 ${
                       isActive
                         ? isLight
-                          ? "text-navy-900 bg-navy-50"
+                          ? "text-navy-950 bg-navy-50"
                           : "text-white bg-white/10"
                         : isLight
-                          ? "text-navy-600 hover:text-navy-900 hover:bg-navy-50"
-                          : "text-white/70 hover:text-white hover:bg-white/10"
+                          ? "text-navy-950 hover:text-copper"
+                          : "text-white hover:text-copper"
                     }`}
                   >
                     {link.label}
