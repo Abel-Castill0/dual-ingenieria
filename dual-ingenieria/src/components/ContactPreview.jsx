@@ -104,8 +104,7 @@ export default function ContactPreview() {
         PUBLIC_KEY
       );
       setStatus("success");
-    } catch (err) {
-      console.error("EmailJS error:", err);
+    } catch {
       setStatus("error");
     }
 
