@@ -15,19 +15,31 @@ export default function ServiciosContent() {
   const sectionRef = useRef(null);
 
   useGSAP(() => {
-    services.forEach((_, i) => {
-      gsap.fromTo(
-        `.s-item-${i}`,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: "power4.out",
-          scrollTrigger: { trigger: `.s-item-${i}`, start: "top 85%", once: true },
-        }
-      );
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      services.forEach((_, i) => {
+        gsap.fromTo(
+          `.s-item-${i}`,
+          { y: 50, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            ease: "power4.out",
+            scrollTrigger: { trigger: `.s-item-${i}`, start: "top 85%", once: true },
+          }
+        );
+      });
     });
+
+    // Móvil: sin ScrollTrigger ni tweens — tarjetas estáticas y visibles,
+    // cero reflows en procesadores débiles.
+    mm.add("(max-width: 767px)", () => {
+      gsap.set("[class*='s-item-']", { opacity: 1, y: 0 });
+    });
+
+    return () => mm.revert();
   }, { scope: sectionRef });
 
   return (

@@ -23,11 +23,22 @@ export default function StoreContent() {
   const filtered = activeCat === "all" ? products : products.filter((p) => p.cat === activeCat);
 
   useGSAP(() => {
-    gsap.fromTo(
-      ".c-reveal",
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, stagger: 0.04, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 85%" } }
-    );
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      gsap.fromTo(
+        ".c-reveal",
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.04, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 85%" } }
+      );
+    });
+
+    // Móvil: productos estáticos y visibles — sin stagger ni ScrollTrigger.
+    mm.add("(max-width: 767px)", () => {
+      gsap.set(".c-reveal", { opacity: 1, y: 0 });
+    });
+
+    return () => mm.revert();
   }, { scope: sectionRef });
 
   const handleAdd = (product) => {
