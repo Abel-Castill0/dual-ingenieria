@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import useIsMobile from "@/hooks/useIsMobile";
+import MobileCircuitBackground from "@/components/MobileCircuitBackground";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -122,12 +123,9 @@ export default function HeroSection() {
         </div>
       )}
 
-      {/* Degradación móvil: glow estático cobre, cero JS, cero GPU */}
+      {/* Degradación móvil: circuito SVG estático — cero JS, cero GPU */}
       {isMobile === true && (
-        <div className="absolute inset-0 z-0 pointer-events-none flex items-center justify-center" aria-hidden>
-          {/* TODO: Reemplazar con imagen WebP del tablero 3D */}
-          <div className="w-64 h-64 rounded-full bg-copper/5 blur-3xl" />
-        </div>
+        <MobileCircuitBackground className="absolute inset-0 z-0 w-full h-full pointer-events-none opacity-70" />
       )}
 
       {/* Content */}
