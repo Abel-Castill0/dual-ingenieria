@@ -21,7 +21,10 @@ export default function TiltCard({ children, className = "", maxTilt = 7 }) {
     const cfg = { duration: 0.4, ease: "power3" };
     const rotateXTo = gsap.quickTo(ref.current, "rotationX", cfg);
     const rotateYTo = gsap.quickTo(ref.current, "rotationY", cfg);
-    const scaleTo = gsap.quickTo(ref.current, "scale", cfg);
+    // scaleX/scaleY separados: el shorthand "scale" no es reseteable en el
+    // revert de useGSAP y GSAP lo advierte en consola durante Fast Refresh.
+    const scaleXTo = gsap.quickTo(ref.current, "scaleX", cfg);
+    const scaleYTo = gsap.quickTo(ref.current, "scaleY", cfg);
 
     const handleMouseMove = (e) => {
       const rect = ref.current.getBoundingClientRect();
@@ -29,13 +32,15 @@ export default function TiltCard({ children, className = "", maxTilt = 7 }) {
       const py = (e.clientY - rect.top) / rect.height - 0.5;
       rotateXTo(maxTilt * -py * 2);
       rotateYTo(maxTilt * px * 2);
-      scaleTo(1.02);
+      scaleXTo(1.02);
+      scaleYTo(1.02);
     };
 
     const handleMouseLeave = () => {
       rotateXTo(0);
       rotateYTo(0);
-      scaleTo(1);
+      scaleXTo(1);
+      scaleYTo(1);
     };
 
     const el = ref.current;
