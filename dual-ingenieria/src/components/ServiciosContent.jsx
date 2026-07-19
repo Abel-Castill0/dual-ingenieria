@@ -24,7 +24,7 @@ export default function ServiciosContent() {
           opacity: 1,
           duration: 0.7,
           ease: "power4.out",
-          scrollTrigger: { trigger: `.s-item-${i}`, start: "top 82%", once: true },
+          scrollTrigger: { trigger: `.s-item-${i}`, start: "top 85%", once: true },
         }
       );
     });

@@ -26,7 +26,7 @@ export default function StoreContent() {
     gsap.fromTo(
       ".c-reveal",
       { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.5, stagger: 0.04, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 80%" } }
+      { y: 0, opacity: 1, duration: 0.5, stagger: 0.04, ease: "power4.out", scrollTrigger: { trigger: sectionRef.current, start: "top 85%" } }
     );
   }, { scope: sectionRef });
 
